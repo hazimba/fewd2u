@@ -1,10 +1,15 @@
 import { User } from "@/types";
-import { baseUrl } from "@/lib/getBaseUrl";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const res = await fetch(`${baseUrl}/api/users`, { cache: "no-store" });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/users`,
+    {
+      cache: "no-store",
+      next: { revalidate: 0 },
+    }
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch users");
   }
