@@ -1,0 +1,60 @@
+## fewd2u
+
+Technical Requirements
+
+1. Frontend: React or Next.js for SSR.
+2. Backend: Node.js
+3. Database: Firestore (firebase)
+4. Authentication: Firebase
+5. Hosting: Vercel (frontend && backend)
+6. QR Code Generation: Backend generates a QR code linked to the restaurant’s menu URL.
+
+Firebase (Google’s Native Choice)
+✅ Tight integration with Google Cloud.
+✅ Authentication (email/password, Google login, etc.).
+✅ Firestore or Realtime Database (scales automatically).
+✅ File storage for food images (Firebase Storage).
+✅ Firebase handles JWT internally → you don’t have to implement password hashing, session storage, etc
+✅ SDK for web, so you can call directly from Next.js (no custom API needed unless you want business logic).
+Best if → You want quick setup, easy auth, and you’re happy with Firebase’s ecosystem.
+
+## Folder Structure
+
+page - root/src/app/(page) /dashboard/manage /menu
+api - root/src/app/api /auth/login /menu/index /menu/[id] /staff
+components - root/src/app/components /navbar /header /menuCard
+lib - root/src/lib /db.ts /auth.ts /firebase.ts
+.env - root/.env.local
+types - src/types
+
+## Styling Standardization
+
+_font size_
+
+1. mobile
+   header 3xl
+   title xl
+   subtitle lg
+   content md
+   context md
+
+2. web
+   header 5xl
+   title 3xl
+   subtitle xl
+   context md
+   content md
+
+_color_
+
+1. primary - #f5f5f5
+2. secondary - #374340
+3. tertiary - #5D7783
+4. forth - #FF7F11
+5. fifth - #93032E
+
+_font family_
+Inter
+
+_background color_
+#f5f5f5
