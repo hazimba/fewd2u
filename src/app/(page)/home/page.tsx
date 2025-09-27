@@ -4,6 +4,8 @@ import { User } from "@/types";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  const url = `${getBaseUrl()}/api/users`;
+  console.log("Fetching:", url);
   const res = await fetch(`${getBaseUrl()}/api/users`, {
     cache: "no-store",
   });

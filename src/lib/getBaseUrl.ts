@@ -1,5 +1,13 @@
+// lib/getBaseUrl.ts
 export function getBaseUrl() {
-  if (typeof window !== "undefined") return ""; // Browser → relative path
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // Vercel
-  return "http://localhost:3000"; // Dev
+  // Running in the browser → relative path works
+  if (typeof window !== "undefined") return "";
+
+  // Running on Vercel → auto injects VERCEL_URL
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  // Running locally (dev)
+  return "http://localhost:3000";
 }
