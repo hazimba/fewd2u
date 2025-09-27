@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ModeToggle from "@/components/mode-toggle";
 import { Button } from "./ui/button";
+import { NAVIGATION_LINKS } from "@/lib/const";
 
 const Header = () => {
   return (
@@ -11,27 +12,19 @@ const Header = () => {
       </Link>
       <nav>
         <ul className="flex space-x-4 items-center">
-          <li>
-            <Link href="/" className="text-gray-700 hover:text-gray-900">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="text-gray-700 hover:text-gray-900">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="text-gray-700 hover:text-gray-900">
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Button variant="red">
+          {NAVIGATION_LINKS.map((link) => (
+            <li key={link.name}>
               <Link
-                href="/contact"
+                href={link.href}
                 className="text-gray-700 hover:text-gray-900"
               >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Button variant="red">
+              <Link href="/login" className="text-gray-700 hover:text-gray-900">
                 Staff Login
               </Link>
             </Button>
