@@ -1,0 +1,47 @@
+import Image from "next/image";
+import Link from "next/link";
+import ModeToggle from "@/components/mode-toggle";
+import { Button } from "./ui/button";
+
+const Header = () => {
+  return (
+    <header className="w-full p-4 border-b border-gray-300 flex justify-between items-center">
+      <Link href="/">
+        <Image src="/favicon.ico" alt="Fewd2u Logo" width={40} height={40} />
+      </Link>
+      <nav>
+        <ul className="flex space-x-4 items-center">
+          <li>
+            <Link href="/" className="text-gray-700 hover:text-gray-900">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className="text-gray-700 hover:text-gray-900">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" className="text-gray-700 hover:text-gray-900">
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Button variant="red">
+              <Link
+                href="/contact"
+                className="text-gray-700 hover:text-gray-900"
+              >
+                Staff Login
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <ModeToggle />
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
+export default Header;
