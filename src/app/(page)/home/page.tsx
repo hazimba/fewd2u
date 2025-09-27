@@ -1,14 +1,12 @@
-import { getBaseUrl } from "@/lib/getBaseUrl";
+import { baseUrl } from "@/lib/getBaseUrl";
 import { User } from "@/types";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const url = `${getBaseUrl()}/api/users`;
+  const url = `${baseUrl}/api/users`;
   console.log("Fetching:", url);
-  const res = await fetch(`${getBaseUrl()}/api/users`, {
-    cache: "no-store",
-  });
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch users");
   }
