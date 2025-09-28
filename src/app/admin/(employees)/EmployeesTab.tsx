@@ -6,7 +6,7 @@ import EmployeesTable from "./EmployeesTable";
 import { CreateEmployee } from "./CreateEmployee";
 
 const EmployeesTab = () => {
-  const { data, loading, error } = useLazyFetch(`${baseUrl}/api/users`, true);
+  const { data, loading, error } = useLazyFetch(`/api/users`, true);
 
   if (loading) return <SpinnerLoading />;
   if (error) return <p>Error: {error}</p>;
