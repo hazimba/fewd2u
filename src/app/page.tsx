@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
+    // want to add bgcolor but somehow related to dark mode
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Header />
       <div className="flex flex-col items-center justify-center flex-1 px-4 text-center">
@@ -14,7 +15,7 @@ export default function Home() {
         </p>
         <Link href="/home" className="text-white rounded">
           <Button variant="red" className="mt-6">
-            Explore Now
+            Explore Food
           </Button>
         </Link>
       </div>

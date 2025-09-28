@@ -3,6 +3,7 @@ import Link from "next/link";
 import ModeToggle from "@/components/mode-toggle";
 import { Button } from "./ui/button";
 import { NAVIGATION_LINKS } from "@/lib/const";
+import { DropdownMenuHeader } from "./DropdownMenuHeader";
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         <Image src="/favicon.ico" alt="Fewd2u Logo" width={40} height={40} />
       </Link>
       <nav>
-        <ul className="flex space-x-4 items-center">
+        <ul className="flex space-x-4 items-center hidden md:flex">
           {NAVIGATION_LINKS.map((link) => (
             <li key={link.name}>
               <Link
@@ -33,6 +34,9 @@ const Header = () => {
             <ModeToggle />
           </li>
         </ul>
+        <div className="md:hidden">
+          <DropdownMenuHeader />
+        </div>
       </nav>
     </header>
   );
