@@ -1,7 +1,6 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import { LoadingButton } from "@/components/LoadingButton";
 
 export default function Home() {
   return (
@@ -12,11 +11,7 @@ export default function Home() {
         <p className="mt-4 text-lg text-gray-600">
           Your go-to platform for exploring and enjoying food.
         </p>
-        <Link href="/home" className="text-white rounded">
-          <Button variant="red" className="mt-6">
-            Explore Now
-          </Button>
-        </Link>
+        <LoadingButton variant="red" text="Explore Food" destination="/home" />
       </div>
       <Footer />
     </main>
