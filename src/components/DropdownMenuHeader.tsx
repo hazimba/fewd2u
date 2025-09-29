@@ -13,6 +13,7 @@ import {
 import { Home, LayoutList, Menu } from "lucide-react";
 import Link from "next/link";
 import ModeToggle from "./mode-toggle";
+import { LoadingButton } from "./LoadingButton";
 
 export function DropdownMenuHeader() {
   return (
