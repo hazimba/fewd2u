@@ -15,7 +15,7 @@ export const PRODUCTS = [
   {
     id: 1,
     name: "Nasi Lemak",
-    image: "/nasi-lemak.jpg",
+    image: "/products/nasi-lemak.jpg",
     description:
       "Dish originating in Malay cuisine that consists of rice cooked in coconut milk and pandan leaf.",
     course: "Breakfast",
