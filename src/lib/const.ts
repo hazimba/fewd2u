@@ -4,6 +4,13 @@ export const NAVIGATION_LINKS = [
   //   { name: "Contact", href: "/contact" },
 ];
 
+export enum TAB {
+  EMPLOYEES = "employees",
+  PRODUCT = "product",
+  PERMISSION = "permission",
+  OTHER = "other",
+}
+
 export const ADMIN_NAVIGATION_LINKS = [
   { name: "Employees", value: "employees" },
   { name: "Products", value: "product" },
@@ -11,6 +18,43 @@ export const ADMIN_NAVIGATION_LINKS = [
   { name: "Others", value: "other" },
 ];
 
+export const COURSE = [
+  "Breakfast",
+  "Lunch or dinner",
+  "Main course, hearty meal",
+  "Snack",
+  "Dessert",
+  "Beverage",
+];
+
+export const ORIGIN = [
+  "Malaysia",
+  "Singapore",
+  "Indonesia",
+  "Thailand",
+  "Vietnam",
+  "Philippines",
+  "Other",
+];
+
+export const USER_STATUS = ["Permanent", "Contract", "Internship"];
+
+export const USER_ROLES = ["Admin", "Manager", "Staff"];
+
+export const DEPARTMENTS = [
+  "HR",
+  "IT",
+  "Finance",
+  "Marketing",
+  "Sales",
+  "Operations",
+  "Customer Service",
+  "R&D",
+  "Legal",
+  "Admin",
+];
+
+// dummy product data
 export const PRODUCTS = [
   {
     id: 1,
