@@ -1,7 +1,7 @@
 import { SpinnerLoading } from "@/components/ui/spinner";
 import { useLazyFetch } from "@/app/api/lazyload";
 import EmployeesTable from "../(employees)/EmployeesTable";
-import { CreateEmployee } from "../(employees)/CreateEmployee";
+import { CreateEmployee } from "../(employees)/CreateEditEmployee";
 import { ProductCard } from "./ProductCard";
 
 const ProductTab = () => {
