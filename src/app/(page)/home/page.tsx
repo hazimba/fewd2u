@@ -1,5 +1,5 @@
 import { baseUrl } from "@/lib/getBaseUrl";
-import { User } from "@/types";
+import { Employee } from "@/types";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default async function HomePage() {
   if (!res.ok) {
     throw new Error("Failed to fetch users");
   }
-  const users: User[] = await res.json();
+  const users: Employee[] = await res.json();
 
   console.log("Users (Server Component):", users);
 
