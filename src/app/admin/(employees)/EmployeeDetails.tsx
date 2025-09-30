@@ -24,14 +24,14 @@ const EmployeeDetails = ({
     // styling by claude
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-xl">
-        <DialogHeader className="space-y-3">
-          <DialogTitle className="text-2xl">User Details</DialogTitle>
+        <DialogHeader className="lg:space-y-3">
+          <DialogTitle className="lg:text-2xl">User Details</DialogTitle>
           <DialogDescription>View complete user information</DialogDescription>
         </DialogHeader>
 
         {selectedEmployee && (
-          <div className="mt-6 space-y-4">
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+          <div className="lg:mt-6 space-y-4">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-200 hover:bg-slate-100 transition-colors">
               <User className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
@@ -43,7 +43,7 @@ const EmployeeDetails = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-200 hover:bg-slate-100 transition-colors">
               <Mail className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
@@ -55,7 +55,7 @@ const EmployeeDetails = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-200 hover:bg-slate-100 transition-colors">
               <Phone className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
@@ -67,7 +67,7 @@ const EmployeeDetails = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-200 hover:bg-slate-100 transition-colors">
               <Shield className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
@@ -79,7 +79,7 @@ const EmployeeDetails = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
+            <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-200 hover:bg-slate-100 transition-colors">
               <Briefcase className="w-5 h-5 text-slate-600 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">

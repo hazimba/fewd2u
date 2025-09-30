@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { useState } from "react";
-import CreateForm from "./CreateEditForm";
+// import CreateForm from "./CreateEditForm";
 import { Employee } from "@/types";
 import { Edit2Icon, PlusIcon } from "lucide-react";
 import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
@@ -41,7 +41,7 @@ const formSchema = z.object({
   position: z.string().optional(),
 });
 
-export function CreateEmployee({
+export function CreateProduct({
   refetch,
   editMode,
   employee,
@@ -115,7 +115,7 @@ export function CreateEmployee({
             className="space-y-4"
           >
             <div className="pb-8 p-2 h-[40vh] overflow-y-auto">
-              <CreateForm form={form} editMode={editMode} />
+              {/* <CreateForm form={form} editMode={editMode} /> */}
             </div>
             <Button type="submit">
               {editMode ? "Save Changes" : "Create"}

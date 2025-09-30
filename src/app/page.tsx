@@ -11,7 +11,12 @@ export default function Home() {
         <p className="mt-4 text-lg text-gray-600">
           Your go-to platform for exploring and enjoying food.
         </p>
-        <LoadingButton variant="red" text="Explore Food" destination="/home" />
+        <LoadingButton
+          type="button"
+          variant="red"
+          text="Explore Food"
+          destination="/home"
+        />
       </div>
       <Footer />
     </main>

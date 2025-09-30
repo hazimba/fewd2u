@@ -6,6 +6,8 @@ import {
   doc,
   getDocs,
   updateDoc,
+  getDocFromCache,
+  getDocsFromCache,
 } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { Employee } from "@/types";
@@ -24,12 +26,23 @@ export async function fetchUsers() {
 
 export async function GET() {
   try {
+    // const cache = await getDocsFromCache(collection(db, "Users"));
+    // if (cache && !cache.empty) {
+    //   const cachedUsers = cache.docs.map((doc) => ({
+    //     id: doc.id,
+    //     ...doc.data(),
+    //   })) as Employee[];
+    //   // somehow console log showing but still make an api call and page still loading
+    //   console.log("Serving users from cache");
+    //   return NextResponse.json(cachedUsers);
+    // }
+
     const snapshot = await getDocs(collection(db, "Users"));
     const users = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     })) as Employee[];
-
+    console.log("Serving users from server");
     return NextResponse.json(users);
   } catch (error) {
     console.error("Error fetching users:", error);

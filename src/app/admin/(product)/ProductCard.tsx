@@ -1,19 +1,15 @@
-import { Button } from "@/components/ui/button";
+"use client";
 import {
   Card,
   CardAction,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Edit, Edit2Icon } from "lucide-react";
-import Image from "next/image";
 import { PRODUCTS } from "@/lib/const";
 import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
+import { Edit2Icon } from "lucide-react";
+import Image from "next/image";
 
 export function ProductCard() {
   const isMobile = useMobileDetectClient();

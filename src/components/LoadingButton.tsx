@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
 export function LoadingButton({
+  type = "button",
   text,
   destination,
   variant = "default",
 }: {
+  type: "button" | "submit";
   text: string;
   destination: string;
   variant?:
@@ -26,6 +28,7 @@ export function LoadingButton({
 
   return (
     <Button
+      type={type}
       variant={variant}
       className="mt-6 flex items-center"
       onClick={() => startTransition(() => router.push(destination))}

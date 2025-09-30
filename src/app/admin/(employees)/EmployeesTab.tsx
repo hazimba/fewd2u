@@ -31,18 +31,24 @@ const EmployeesTab = () => {
     refetch();
   }, []);
 
-  if (loading) return <SpinnerLoading />;
   if (error) return <p>Error: {error}</p>;
   if (!employees) return null;
 
   return (
     <div className="p-4 overflow-y auto lg:h-172">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold mb-4">Employees</h2>
+        <div className="flex flex-col mb-4">
+          <h2 className="text-lg font-semibold">Employees</h2>
+          <span className="text-xs lg:text-sm">List of Employee</span>
+        </div>
         {/* thats why we pass here so that in the component can be called (reference: 101) */}
         <CreateEmployee refetch={refetch} />
       </div>
-      <EmployeesTable data={employees} refetch={refetch} />
+      {loading ? (
+        <SpinnerLoading />
+      ) : (
+        <EmployeesTable data={employees} refetch={refetch} />
+      )}
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { Employee } from "@/types";
 import { useState } from "react";
 import ActionEmployees from "./ActionEmployees";
 import EmployeeDetails from "./EmployeeDetails";
+import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
 
 interface EmployeesTableProps {
   data: Employee[];
@@ -19,6 +20,7 @@ interface EmployeesTableProps {
 }
 
 const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
+  const isMobile = useMobileDetectClient();
   const [open, setOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee>(
     {} as Employee
@@ -26,13 +28,16 @@ const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
 
   return (
     <Table>
-      <TableCaption>A list of employees.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[20px] text-ellipsis">Email</TableHead>
           <TableHead>Name</TableHead>
           <TableHead className="">Phone</TableHead>
-          <TableHead className="">Status</TableHead>
+          {isMobile ? null : (
+            <>
+              <TableHead className="w-[20px] text-ellipsis">Email</TableHead>
+              <TableHead className="">Status</TableHead>
+            </>
+          )}
           <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
