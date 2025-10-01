@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { Employee } from "@/types";
 import { Trash2Icon } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { CreateEmployee } from "./CreateEditEmployee";
 import { handleDelete } from "@/utils/handleDelete";
 
@@ -17,6 +17,7 @@ interface ActionProps {
 }
 
 const ActionEmployees = ({ employee, refetch }: ActionProps) => {
+  const [isPending, startTransition] = useTransition();
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
@@ -41,8 +42,11 @@ const ActionEmployees = ({ employee, refetch }: ActionProps) => {
             <Button
               variant="destructive"
               onClick={() =>
-                handleDelete(employee.id, refetch, setIsDeleting, "users")
+                startTransition(() =>
+                  handleDelete(employee.id, refetch, setIsDeleting, "users")
+                )
               }
+              disabled={isPending}
             >
               Delete
             </Button>

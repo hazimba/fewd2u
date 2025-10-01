@@ -13,11 +13,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import CreateForm from "./CreateEditForm";
+import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
 import { Employee } from "@/types";
 import { Edit2Icon, PlusIcon } from "lucide-react";
-import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
+import { useState, useTransition } from "react";
+import CreateForm from "./CreateEditForm";
 
 interface CreateEmployeeProps {
   refetch: () => void;
@@ -47,6 +47,7 @@ export function CreateEmployee({
   employee,
 }: CreateEmployeeProps) {
   const isMobile = useMobileDetectClient();
+  const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -111,13 +112,20 @@ export function CreateEmployee({
         <Form {...form}>
           <form
             // pass the id here even when create, when create, id will be undefined (reference: 100)
-            onSubmit={form.handleSubmit((data) => onSubmit(data, employee?.id))}
+            // onSubmit={form.handleSubmit((data) => onSubmit(data, employee?.id))}
             className="space-y-4"
           >
             <div className="pb-8 p-2 h-[40vh] overflow-y-auto">
               <CreateForm form={form} editMode={editMode} />
             </div>
-            <Button type="submit">
+            <Button
+              type="submit"
+              // pass the id here even when create, when create, id will be undefined (reference: 100)
+              onClick={form.handleSubmit((data) =>
+                startTransition(() => onSubmit(data, employee?.id))
+              )}
+              disabled={isPending}
+            >
               {editMode ? "Save Changes" : "Create"}
             </Button>
           </form>
