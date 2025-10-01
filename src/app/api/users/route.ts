@@ -11,6 +11,23 @@ import {
 } from "firebase/firestore";
 import { db } from "@/app/firebase/config";
 import { Employee } from "@/types";
+import z from "zod";
+
+export const formSchemaEmployee = z.object({
+  email: z.string().min(2, {
+    message: "Enter a valid email address.",
+  }),
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  phone: z.string().min(1, {
+    message: "Enter a valid phone number.",
+  }),
+  status: z.string().optional(),
+  role: z.string().optional(),
+  department: z.string().optional(),
+  position: z.string().optional(),
+});
 
 export async function fetchUsers() {
   try {

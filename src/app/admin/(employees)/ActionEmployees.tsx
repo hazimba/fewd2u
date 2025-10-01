@@ -1,15 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import PopoverDeleteButton from "@/app/shared/PopoverDeleteButton";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { Employee } from "@/types";
 import { Trash2Icon } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { CreateEmployee } from "./CreateEditEmployee";
-import { handleDelete } from "@/utils/handleDelete";
 
 interface ActionProps {
   employee: Employee;
@@ -17,7 +12,6 @@ interface ActionProps {
 }
 
 const ActionEmployees = ({ employee, refetch }: ActionProps) => {
-  const [isPending, startTransition] = useTransition();
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
@@ -27,31 +21,12 @@ const ActionEmployees = ({ employee, refetch }: ActionProps) => {
         <PopoverTrigger>
           <Trash2Icon className="cursor-pointer size-4" />
         </PopoverTrigger>
-        <PopoverContent className="w-60 p-4 mx-4">
-          <p className="mb-4 text-sm">
-            Are you sure you want to delete <b>{`${employee.name}`}</b>?
-          </p>
-          <div className="flex justify-end text-sm">
-            <Button
-              variant="outline"
-              className="mr-2 text-sm"
-              onClick={() => console.log("Cancel deletion")}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() =>
-                startTransition(() =>
-                  handleDelete(employee.id, refetch, setIsDeleting, "users")
-                )
-              }
-              disabled={isPending}
-            >
-              Delete
-            </Button>
-          </div>
-        </PopoverContent>
+        <PopoverDeleteButton
+          data={employee}
+          refetch={refetch}
+          setIsDeleting={setIsDeleting}
+          entity="users"
+        />
       </Popover>
     </span>
   );

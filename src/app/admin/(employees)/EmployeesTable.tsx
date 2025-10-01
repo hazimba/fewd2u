@@ -40,7 +40,7 @@ const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
           <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="border-1">
         {data &&
           data.map((employee) => (
             <TableRow

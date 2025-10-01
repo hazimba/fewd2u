@@ -6,16 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PRODUCTS } from "@/lib/const";
 import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
-import { Edit2Icon } from "lucide-react";
+import { Product } from "@/types";
 import Image from "next/image";
+import { useState } from "react";
+import ActionProduct from "./ActionProduct";
 
-export function ProductCard() {
+interface ProductCardProps {
+  products: Product[];
+  refetch: () => void;
+}
+
+export function ProductCard({ products, refetch }: ProductCardProps) {
   const isMobile = useMobileDetectClient();
+  const [openPopoverId, setOpenPopoverId] = useState<string | null>(null);
+
   return (
     <div className="flex flex-col gap-4">
-      {PRODUCTS.map((product) => (
+      {products.map((product) => (
         <div
           key={product.name}
           className="flex justify-center items-center h-full"
@@ -23,7 +31,12 @@ export function ProductCard() {
           <Card className="w-full flex lg:flex-row p-4 justify-between">
             <CardDescription className="text-sm text-gray-500 mb-2">
               <Image
-                src={product.image}
+                priority
+                src={
+                  product.mainImageUrl
+                    ? product.mainImageUrl
+                    : "/default-image.png"
+                }
                 alt={product.name}
                 width={200}
                 height={200}
@@ -38,19 +51,26 @@ export function ProductCard() {
                 <div>
                   <CardDescription>{product.description}</CardDescription>
                   <CardDescription>
-                    Course: <span className="font-bold">{product.course}</span>
+                    Course:{" "}
+                    <span className="font-bold">{product.category}</span>
                   </CardDescription>
                   <CardDescription>
                     Place of origin :{" "}
                     <span className="font-bold">{product.origin}</span>
                   </CardDescription>
                   <CardDescription>
-                    Price: <span className="font-bold">{product.price}</span>
+                    Price (RM):{" "}
+                    <span className="font-bold">{product.price}</span>
                   </CardDescription>
                 </div>
               </div>
               <CardAction>
-                <Edit2Icon className="h-4 w-4" />
+                <ActionProduct
+                  product={product}
+                  refetch={refetch}
+                  openPopoverId={openPopoverId}
+                  setOpenPopoverId={setOpenPopoverId}
+                />
               </CardAction>
             </CardHeader>
           </Card>
