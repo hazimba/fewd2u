@@ -2,12 +2,12 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
 import { Employee } from "@/types";
 import { useState } from "react";
 import ActionEmployees from "./ActionEmployees";
@@ -19,6 +19,7 @@ interface EmployeesTableProps {
 }
 
 const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
+  const isMobile = useMobileDetectClient();
   const [open, setOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee>(
     {} as Employee
@@ -26,17 +27,20 @@ const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
 
   return (
     <Table>
-      <TableCaption>A list of employees.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[20px] text-ellipsis">Email</TableHead>
           <TableHead>Name</TableHead>
           <TableHead className="">Phone</TableHead>
-          <TableHead className="">Status</TableHead>
+          {isMobile ? null : (
+            <>
+              <TableHead className="w-[20px] text-ellipsis">Email</TableHead>
+              <TableHead className="">Status</TableHead>
+            </>
+          )}
           <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="border-1">
         {data &&
           data.map((employee) => (
             <TableRow
@@ -46,10 +50,16 @@ const EmployeesTable = ({ data, refetch }: EmployeesTableProps) => {
                 setOpen(true);
               }}
             >
-              <TableCell className="font-medium">{employee.email}</TableCell>
               <TableCell>{employee.name}</TableCell>
               <TableCell className="">{employee.phone}</TableCell>
-              <TableCell className="">{employee.status}</TableCell>
+              {isMobile ? null : (
+                <>
+                  <TableCell className="font-medium">
+                    {employee.email}
+                  </TableCell>
+                  <TableCell className="">{employee.status}</TableCell>
+                </>
+              )}
               <TableCell className="flex justify-end">
                 <ActionEmployees employee={employee} refetch={refetch} />
               </TableCell>

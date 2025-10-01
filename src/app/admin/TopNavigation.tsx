@@ -1,3 +1,4 @@
+"use client";
 import ModeToggle from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,7 @@ const TopNavigation = () => {
       </div>
       <div className="flex gap-4 justify-center items-center">
         <ModeToggle toggle />
+        {/* to use LoadingButton to avoid use client above */}
         <Button
           variant="red"
           onClick={() => {

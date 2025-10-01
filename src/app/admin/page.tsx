@@ -1,4 +1,3 @@
-"use client";
 import LeftNavigation from "./LeftNavigation";
 import TopNavigation from "./TopNavigation";
 

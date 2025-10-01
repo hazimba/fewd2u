@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { AlertError } from "@/components/Alert";
 import { useRouter } from "next/navigation";
+import { LoadingButton } from "@/components/LoadingButton";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -97,7 +98,12 @@ const LoginForm = () => {
             />
           )}
         </div>
-        <Button type="submit">Submit</Button>
+        <LoadingButton
+          type="submit"
+          variant="default"
+          text="Login"
+          destination="/admin"
+        />
         <div className="pt-2 flex items-center justify-center text-sm gap-1">
           Don&apos;t have an account?
           <a href="/register" className="hover:underline text-blue-600">
