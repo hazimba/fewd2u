@@ -1,8 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Upload } from "lucide-react";
-import React, { RefObject, useState, useEffect, useRef } from "react";
-import { supabase } from "@/lib/supabaseClient";
-import imageCompression from "browser-image-compression";
+import React, { useRef, useState } from "react";
 
 interface FileDropzoneProps {
   form: any;
@@ -11,6 +10,7 @@ interface FileDropzoneProps {
 
 export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
   const [preview, setPreview] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -19,6 +19,7 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
     if (files && files.length > 0) {
       const file = files[0];
       onFileSelect?.(file);
+      setSelectedFile(file);
 
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -29,9 +30,9 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
   };
 
   return (
-    <div className="px-6">
+    <div className="flex flex-row gap-4">
       <div
-        className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer"
+        className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer w-1/3"
         onClick={() => fileInputRef.current?.click()}
         onDragOver={(e) => e.preventDefault()}
       >
@@ -39,7 +40,7 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
           <Upload className="h-5 w-5 text-muted-foreground" />
         </div>
         <p className="text-sm font-medium text-foreground">
-          Upload a project image
+          Upload a Main image
         </p>
         <p className="text-sm text-muted-foreground mt-1">
           or,{" "}
@@ -63,13 +64,28 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
           }}
         />
       </div>
-      <div>
+      <div className="w-2/3">
         {preview && (
-          <img
-            src={preview}
-            alt="Preview"
-            className="mt-4 max-h-20 rounded-lg object-contain"
-          />
+          <div className="flex items-center w-full gap-8 border p-4 rounded-md">
+            <div className="flex items-center justify-start gap-4">
+              <img
+                src={preview}
+                alt="Preview"
+                className="max-h-30 max-w-15 rounded-lg object-contain"
+              />
+            </div>
+            <div className="flex flex-col gap-2 items-start">
+              <div>{selectedFile ? selectedFile.name : "No file selected"}</div>
+              <Button
+                type="button"
+                className="text-sm border-none"
+                onClick={() => setPreview(null)}
+                variant="destructive"
+              >
+                Remove
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     </div>

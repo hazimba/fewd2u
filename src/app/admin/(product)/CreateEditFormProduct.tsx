@@ -29,20 +29,11 @@ const CreateFormProduct = ({
           render={({ field }) => <input type="hidden" {...field} />}
         />
       ) : null}
-
-      <FormField
-        control={form.control}
-        name="mainImageUrl2"
-        render={() => (
-          <ImageUploadForm form={form} onFileSelect={onFileSelect} />
-        )}
-      />
-
       <FormField
         control={form.control}
         name="name"
         render={({ field }) => (
-          <FormItem className="mb-4 mt-8">
+          <FormItem className="mb-4">
             <FormLabel>Name</FormLabel>
             <FormControl>
               <Input disabled={editMode} placeholder="Name" {...field} />
@@ -160,6 +151,20 @@ const CreateFormProduct = ({
           />*/}
         </>
       ) : null}
+      <FormField
+        control={form.control}
+        name="mainImageUrl2"
+        render={() => (
+          <FormItem className="mb-4">
+            <FormLabel>Main Image</FormLabel>
+            <FormControl>
+              <ImageUploadForm form={form} onFileSelect={onFileSelect} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      {/* soon to add secondary image upload */}
     </>
   );
 };

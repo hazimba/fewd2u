@@ -34,7 +34,7 @@ const ProductTab = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="p-4 overflow-y auto h-screen lg:h-172 px-4">
+    <div className="p-4 overflow-y auto h-screen lg:h-[85vh] px-4">
       <div className="flex justify-between items-center mb-4">
         <div className="flex flex-col mb-4">
           <h2 className="text-lg font-semibold">Product</h2>
@@ -49,7 +49,7 @@ const ProductTab = () => {
           <ProductCard products={products} refetch={refetch} />
         )}
       </div>
-      <div className="h-32">{/* Spacer to prevent content cutoff */}</div>
+      <div className="h-16" />
     </div>
   );
 };

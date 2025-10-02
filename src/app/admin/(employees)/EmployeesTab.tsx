@@ -35,7 +35,7 @@ const EmployeesTab = () => {
   if (!employees) return null;
 
   return (
-    <div className="p-4 overflow-y auto lg:h-172">
+    <div className="p-4 overflow-y auto lg:h-[80vh]">
       <div className="flex justify-between items-center mb-4">
         <div className="flex flex-col mb-4">
           <h2 className="text-lg font-semibold">Employees</h2>

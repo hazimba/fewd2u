@@ -82,7 +82,7 @@ export function CreateProduct({
             // )}
             className="space-y-4"
           >
-            <div className="pb-8 p-2 h-[40vh] overflow-y-auto">
+            <div className="p-2 h-[40vh] overflow-y-auto">
               <CreateEditFormProduct
                 form={form}
                 editMode={editMode}
@@ -91,6 +91,7 @@ export function CreateProduct({
             </div>
             <Button
               type="submit"
+              className="py-2 w-full mb-4"
               onClick={form.handleSubmit(
                 (data) => {
                   startTransition(() =>

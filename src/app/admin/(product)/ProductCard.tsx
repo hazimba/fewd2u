@@ -11,6 +11,7 @@ import { Product } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
 import ActionProduct from "./ActionProduct";
+import { ProductDetails } from "./ProductDetails";
 
 interface ProductCardProps {
   products: Product[];
@@ -20,6 +21,8 @@ interface ProductCardProps {
 export function ProductCard({ products, refetch }: ProductCardProps) {
   const isMobile = useMobileDetectClient();
   const [openPopoverId, setOpenPopoverId] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
     <div className="flex flex-col gap-4">
@@ -27,6 +30,11 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
         <div
           key={product.name}
           className="flex justify-center items-center h-full"
+          onClick={() => {
+            setOpen(true);
+            // to specify product or else will render all and makes background black
+            setSelectedProduct(product);
+          }}
         >
           <Card className="w-full flex lg:flex-row p-4 justify-between">
             <CardDescription className="text-sm text-gray-500 mb-2">
@@ -76,6 +84,7 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
           </Card>
         </div>
       ))}
+      <ProductDetails open={open} setOpen={setOpen} product={selectedProduct} />
     </div>
   );
 }
