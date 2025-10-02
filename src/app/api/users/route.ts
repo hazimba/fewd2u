@@ -29,9 +29,9 @@ export const formSchemaEmployee = z.object({
   position: z.string().optional(),
 });
 
-export async function fetchUsers() {
+export async function fetchUsers(inputValue: string = ""): Promise<Employee[]> {
   try {
-    const res = await fetch(`/api/users`);
+    const res = await fetch(`/api/users?search=${inputValue}`);
     if (!res.ok) throw new Error("Failed to fetch users");
     const data = await res.json();
     return data;
@@ -41,7 +41,10 @@ export async function fetchUsers() {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const search = searchParams.get("search") || "";
+  console.log("Search term:", search);
   try {
     // const cache = await getDocsFromCache(collection(db, "Users"));
     // if (cache && !cache.empty) {
@@ -53,6 +56,18 @@ export async function GET() {
     //   console.log("Serving users from cache");
     //   return NextResponse.json(cachedUsers);
     // }
+
+    if (search) {
+      const snapshot = await getDocs(collection(db, "Users"));
+      // Filter products based on the search term (case-insensitive)
+      const filteredUsers = snapshot.docs
+        .map((doc) => ({ id: doc.id, name: doc.data().name, ...doc.data() }))
+        .filter((user) =>
+          user.name.toLowerCase().includes(search.toLowerCase())
+        );
+      console.log("Filtered users:", filteredUsers);
+      return NextResponse.json(filteredUsers);
+    }
 
     const snapshot = await getDocs(collection(db, "Users"));
     const users = snapshot.docs.map((doc) => ({

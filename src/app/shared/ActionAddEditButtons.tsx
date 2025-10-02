@@ -18,7 +18,7 @@ const ActionAddEditButtons = ({
       {editMode ? (
         <Edit2Icon className="icon-action-hover-blue" />
       ) : (
-        <Button className="button-action-hover-blue">
+        <Button className="button-action-hover-blue w-1/4">
           {isMobile ? <PlusIcon /> : `Add ${entity}`}
         </Button>
       )}

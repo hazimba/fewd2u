@@ -2,21 +2,23 @@ import { formSchemaEmployee } from "@/app/api/users/route";
 import { formSchemaProduct } from "@/app/api/products/route";
 import z from "zod";
 import { handleFileSelect } from "@/app/admin/(product)/HandleFileSelect";
+import { FormProps, UseFormReturn } from "react-hook-form";
+import { deleteFile } from "@/app/api/products/deleteFile";
 
-interface onSubmitProps {
+interface onSubmitProps<T extends import("react-hook-form").FieldValues> {
   data: z.infer<typeof formSchemaEmployee | typeof formSchemaProduct>;
   id?: string;
   editMode?: boolean;
   refetch: () => void;
   setOpen: (open: boolean) => void;
-  form: {
-    reset: () => void;
-  };
+  form: UseFormReturn<T>;
   entity?: "users" | "products";
   file?: File | null;
 }
 
-export const onSubmit = async ({
+export const onSubmit = async <
+  T extends import("react-hook-form").FieldValues
+>({
   data,
   id,
   editMode,
@@ -25,12 +27,24 @@ export const onSubmit = async ({
   form,
   entity,
   file,
-}: onSubmitProps) => {
+}: onSubmitProps<T>) => {
   try {
+    const getMainImg = form.watch(
+      "mainImageUrl" as import("react-hook-form").Path<T>
+    );
+
+    if (getMainImg && editMode) {
+      console.log("deleting file", getMainImg);
+      if (typeof getMainImg === "string") {
+        await deleteFile(getMainImg);
+      }
+    }
+
     // If a file is selected, handle the file upload and get the image URL (reference: fileUpload) as form.mainImageUrl accepts a string (reference: fileUpload)
     if (file) {
       const imageUrl = await handleFileSelect(
-        file ? ([file] as unknown as FileList) : null
+        file ? ([file] as unknown as FileList) : null,
+        form
       );
       if (imageUrl) {
         data = { ...data, mainImageUrl: imageUrl };

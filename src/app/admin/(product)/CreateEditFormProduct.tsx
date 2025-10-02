@@ -8,9 +8,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ImageUploadForm } from "./ImageUploadForm";
+import { formSchemaProduct } from "@/app/api/products/route";
+import { UseFormReturn } from "react-hook-form";
+import z from "zod";
 
 interface CreateFormProps {
-  form: any;
+  form: UseFormReturn<z.infer<typeof formSchemaProduct>>;
   editMode?: boolean;
   onFileSelect: (file: File | null) => void;
 }
@@ -26,23 +29,20 @@ const CreateFormProduct = ({
         <FormField
           name="id"
           control={form.control}
-          render={({ field }) => <input type="hidden" {...field} />}
+          render={({ field }) => (
+            <Input
+              type="hidden"
+              {...field}
+              value={field.value as string | number | undefined}
+            />
+          )}
         />
       ) : null}
-
-      <FormField
-        control={form.control}
-        name="mainImageUrl2"
-        render={() => (
-          <ImageUploadForm form={form} onFileSelect={onFileSelect} />
-        )}
-      />
-
       <FormField
         control={form.control}
         name="name"
         render={({ field }) => (
-          <FormItem className="mb-4 mt-8">
+          <FormItem className="mb-4">
             <FormLabel>Name</FormLabel>
             <FormControl>
               <Input disabled={editMode} placeholder="Name" {...field} />
@@ -160,6 +160,20 @@ const CreateFormProduct = ({
           />*/}
         </>
       ) : null}
+      <FormField
+        control={form.control}
+        name="mainImageUrl"
+        render={() => (
+          <FormItem className="mb-4">
+            <FormLabel>Main Image</FormLabel>
+            <FormControl>
+              <ImageUploadForm form={form} onFileSelect={onFileSelect} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      {/* soon to add secondary image upload */}
     </>
   );
 };

@@ -10,8 +10,10 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import { deleteFile } from "./deleteFile";
 
 export const formSchemaProduct = z.object({
+  id: z.any().optional(),
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -33,14 +35,32 @@ export const formSchemaProduct = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export async function fetchProducts(): Promise<any[]> {
-  const response = await fetch("/api/products");
+export async function fetchProducts(searchTerm: string): Promise<any[]> {
+  const response = await fetch(`/api/products?search=${searchTerm}`);
   const data = await response.json();
   return data;
 }
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const search = searchParams.get("search") || "";
+
   const snapshot = await getDocs(collection(db, "Products"));
+
+  if (search) {
+    // Filter products based on the search term (case-insensitive)
+    const filteredProducts = snapshot.docs
+      .map((doc) => ({ id: doc.id, name: doc.data().name, ...doc.data() }))
+      .filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    console.log("Filtered products:", filteredProducts);
+    return new Response(JSON.stringify(filteredProducts), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const products = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
@@ -153,30 +173,7 @@ export async function DELETE(request: Request) {
 
   try {
     if (img) {
-      const url = new URL(img);
-      const bucketName = "fewd2u";
-      const prefix = `/storage/v1/object/public/${bucketName}/`;
-
-      // Extract the file path inside the bucket
-      let filePath = url.pathname.startsWith(prefix)
-        ? url.pathname.slice(prefix.length)
-        : url.pathname.replace(/^\/+/, "");
-
-      const { data, error } = await supabase.storage
-        // bucket
-        .from(bucketName)
-        // folder/fileName.ext
-        .remove([filePath]);
-
-      if (error) {
-        console.error("Supabase Storage deletion error:", {
-          message: error.message,
-          filePath,
-          fullError: error,
-        });
-      } else {
-        console.log("✓ Image deleted successfully:", data);
-      }
+      await deleteFile(img);
     }
 
     const docRef = doc(db, "Products", id);

@@ -11,7 +11,7 @@ import { TAB } from "@/lib/const";
 export default function LeftNavigation() {
   // in future need to use lazy loading for each tab content
 
-  const [activeTab, setActiveTab] = useState<string>(TAB.EMPLOYEES);
+  const [activeTab, setActiveTab] = useState<string>(TAB.PRODUCT);
   const onTabChange = (value: string) => {
     setActiveTab(value);
   };

@@ -11,6 +11,8 @@ import { Product } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
 import ActionProduct from "./ActionProduct";
+import { ProductDetails } from "./ProductDetails";
+import { ImageOff } from "lucide-react";
 
 interface ProductCardProps {
   products: Product[];
@@ -20,6 +22,8 @@ interface ProductCardProps {
 export function ProductCard({ products, refetch }: ProductCardProps) {
   const isMobile = useMobileDetectClient();
   const [openPopoverId, setOpenPopoverId] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
     <div className="flex flex-col gap-4">
@@ -27,23 +31,33 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
         <div
           key={product.name}
           className="flex justify-center items-center h-full"
+          onClick={() => {
+            setOpen(true);
+            // to specify product or else will render all and makes background black
+            setSelectedProduct(product);
+          }}
         >
           <Card className="w-full flex lg:flex-row p-4 justify-between">
             <CardDescription className="text-sm text-gray-500 mb-2">
-              <Image
-                priority
-                src={
-                  product.mainImageUrl
-                    ? product.mainImageUrl
-                    : "/default-image.png"
-                }
-                alt={product.name}
-                width={200}
-                height={200}
-                className={`rounded-md object-cover h-32 ${
-                  isMobile ? "w-full" : "w-48"
-                }`}
-              />
+              {product.mainImageUrl ? (
+                <Image
+                  priority
+                  src={product.mainImageUrl}
+                  alt={product.name}
+                  width={200}
+                  height={200}
+                  className={`rounded-md object-cover h-32 ${
+                    isMobile ? "w-full" : "w-48"
+                  }`}
+                />
+              ) : (
+                <div className="w-48 h-32 bg-gray-200 flex items-center justify-center rounded-md">
+                  <span className="text-gray-500 text-xs gap-2 flex flex-col items-center">
+                    <ImageOff className="w-12 h-12" />
+                    <>Image Not Available</>
+                  </span>
+                </div>
+              )}
             </CardDescription>
             <CardHeader className="flex-1 p-0">
               <div className="flex flex-col justify-between gap-4">
@@ -64,7 +78,7 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
                   </CardDescription>
                 </div>
               </div>
-              <CardAction>
+              <CardAction onClick={(e) => e.stopPropagation()}>
                 <ActionProduct
                   product={product}
                   refetch={refetch}
@@ -76,6 +90,7 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
           </Card>
         </div>
       ))}
+      <ProductDetails open={open} setOpen={setOpen} product={selectedProduct} />
     </div>
   );
 }

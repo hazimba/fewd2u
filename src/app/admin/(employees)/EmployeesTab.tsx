@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import { CreateEmployee } from "./CreateEditEmployee";
 import EmployeesTable from "./EmployeesTable";
 import { Employee } from "@/types";
+import { NameFilterSearch } from "@/app/shared/NameFilterSearch";
+import PageHeader from "@/app/shared/PageHeader";
 
 const EmployeesTab = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState("");
 
   // somehow refetch need to do in parents as it will be passed to children
   // if refetch in children, it will not update the parents state (reference: 101)
@@ -18,7 +21,7 @@ const EmployeesTab = () => {
     setError(null);
     try {
       // as here will get the latest data from the server (reference: 101)
-      const data = await fetchUsers();
+      const data = await fetchUsers(inputValue);
       setEmployees(data);
     } catch (err: any) {
       setError(err.message);
@@ -29,21 +32,27 @@ const EmployeesTab = () => {
 
   useEffect(() => {
     refetch();
+  }, [inputValue]);
+
+  useEffect(() => {
+    refetch();
   }, []);
 
   if (error) return <p>Error: {error}</p>;
-  if (!employees) return null;
 
   return (
-    <div className="p-4 overflow-y auto lg:h-172">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex flex-col mb-4">
-          <h2 className="text-lg font-semibold">Employees</h2>
-          <span className="text-xs lg:text-sm">List of Employee</span>
+    <div className="p-4 overflow-y auto lg:h-[80vh]">
+      <PageHeader
+        title="Employee"
+        setInputValue={setInputValue}
+        refetch={refetch}
+      />
+      {!employees ? (
+        <div className="text-center h-[40vh] flex justify-center items-center mt-20">
+          <p className="text-lg">No employees found.</p>
+          {/* <CreateEmployee refetch={refetch} /> */}
         </div>
-        {/* thats why we pass here so that in the component can be called (reference: 101) */}
-        <CreateEmployee refetch={refetch} />
-      </div>
+      ) : null}
       {loading ? (
         <SpinnerLoading />
       ) : (
