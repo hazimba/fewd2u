@@ -22,7 +22,7 @@ export default function LeftNavigation() {
       orientation="vertical"
       className="lg:flex w-full lg:flex-row"
     >
-      <TabsList className="bg-white dark:bg-[#171726] dark:rounded-lg flex-wrap lg:gap-2 rounded-none lg:border-r-1 lg:flex lg:flex-col h-full w-screen lg:w-[15%] w-[100%] sticky top-2 ">
+      <TabsList className=" dark:rounded-lg bg-custom-default flex-wrap lg:gap-2 rounded-none lg:border-r-1 lg:flex lg:flex-col h-full w-screen lg:w-[15%] w-[100%] sticky top-2 ">
         <div className="hidden lg:block align-left w-full p-2 text-sm">
           Manage
         </div>

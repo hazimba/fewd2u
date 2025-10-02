@@ -26,7 +26,7 @@ export function LoadingButton({
     <Button
       type={type}
       variant={variant}
-      className="mt-6 flex items-center"
+      className="flex items-center"
       onClick={
         destination
           ? () => {
