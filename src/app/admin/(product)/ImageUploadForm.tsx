@@ -33,9 +33,9 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
   };
 
   return (
-    <div className="flex flex-row gap-4 h-[25vh]">
+    <div className="flex lg:flex-row flex-col gap-4 h-[25vh]">
       <div
-        className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer w-1/3"
+        className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer w-full lg:w-1/3"
         onClick={() => fileInputRef.current?.click()}
         onDragOver={(e) => e.preventDefault()}
       >
@@ -67,7 +67,7 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
           }}
         />
       </div>
-      <div className="w-2/3 flex flex-col gap-2 justify-between">
+      <div className="lg:w-2/3 flex flex-col gap-2 justify-between">
         {getMainImg && (
           <div className="flex items-center w-full gap-8 border p-2 rounded-md">
             <div className="flex items-center justify-start gap-4">

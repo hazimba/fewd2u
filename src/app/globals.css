@@ -27,6 +27,12 @@
   }
 }
 
+@layer components {
+  .bg-custom-default {
+    @apply bg-[#F5F5F5] dark:bg-[#020712];
+  }
+}
+
 :root {
   --foreground: #171717;
   --radius: 0.625rem;

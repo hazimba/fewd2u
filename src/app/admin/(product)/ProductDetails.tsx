@@ -26,7 +26,7 @@ export function ProductDetails({
 }: ProductDetailsProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-3xl">
+      <DialogContent className="sm:max-w-3xl max-h-[80vh] overflow-x-auto">
         <DialogHeader>
           <DialogTitle>Product Details</DialogTitle>
           <DialogDescription>
@@ -34,7 +34,7 @@ export function ProductDetails({
           </DialogDescription>
         </DialogHeader>
         {product && (
-          <div className="lg:mt-6 space-y-4 flex flex-col lg:flex-row gap-4 max-h-[80vh] overflow-y-auto">
+          <div className="lg:mt-6 space-y-4 flex flex-col lg:flex-row gap-4 overflow-y-auto">
             <div className="lg:w-3/5 flex w-full items-center justify-center">
               {/* <Image
                 priority
