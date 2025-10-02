@@ -1,13 +1,20 @@
 import { formSchemaProduct } from "@/app/api/products/route";
 import { supabase } from "@/lib/supabaseClient";
 import imageCompression from "browser-image-compression";
-import { UseFormReturn } from "react-hook-form";
+// import { UseFormReturn } from "react-hook-form";
 import z from "zod";
 
-export const handleFileSelect = async (
+import { UseFormReturn, FieldValues } from "react-hook-form";
+
+// export async function handleFileSelect<T extends FieldValues>(
+//   files: FileList | null,
+//   form: UseFormReturn<T>
+// ): Promise<string | undefined> {
+
+export async function handleFileSelect<T extends FieldValues>(
   files: FileList | null,
-  form: UseFormReturn<z.infer<typeof formSchemaProduct>>
-) => {
+  form: UseFormReturn<T>
+): Promise<string | undefined> {
   if (!files) return;
   let file = files[0];
 
@@ -41,4 +48,4 @@ export const handleFileSelect = async (
   } catch (error) {
     console.error("Error uploading file:", error);
   }
-};
+}
