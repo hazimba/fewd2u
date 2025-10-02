@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { CreateEmployee } from "./CreateEditEmployee";
 import EmployeesTable from "./EmployeesTable";
 import { Employee } from "@/types";
+import { NameFilterSearch } from "@/app/shared/NameFilterSearch";
 
 const EmployeesTab = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState("");
 
   // somehow refetch need to do in parents as it will be passed to children
   // if refetch in children, it will not update the parents state (reference: 101)
@@ -18,7 +20,7 @@ const EmployeesTab = () => {
     setError(null);
     try {
       // as here will get the latest data from the server (reference: 101)
-      const data = await fetchUsers();
+      const data = await fetchUsers(inputValue);
       setEmployees(data);
     } catch (err: any) {
       setError(err.message);
@@ -26,6 +28,10 @@ const EmployeesTab = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    refetch();
+  }, [inputValue]);
 
   useEffect(() => {
     refetch();
@@ -42,7 +48,10 @@ const EmployeesTab = () => {
           <span className="text-xs lg:text-sm">List of Employee</span>
         </div>
         {/* thats why we pass here so that in the component can be called (reference: 101) */}
-        <CreateEmployee refetch={refetch} />
+        <div className="flex space-x-2">
+          <NameFilterSearch setInputValue={setInputValue} entity="Employee" />
+          <CreateEmployee refetch={refetch} />
+        </div>
       </div>
       {loading ? (
         <SpinnerLoading />

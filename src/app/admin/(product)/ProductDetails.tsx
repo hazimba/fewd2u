@@ -8,12 +8,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Product } from "@/types";
 import { Briefcase, Mail, Phone, Shield, User } from "lucide-react";
-import Image from "next/image";
-import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
 import { ImageCarousel } from "./ImageCarousel";
 
 interface ProductDetailsProps {
@@ -27,15 +24,13 @@ export function ProductDetails({
   setOpen,
   product,
 }: ProductDetailsProps) {
-  const isMobile = useMobileDetectClient();
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>Product Details</DialogTitle>
           <DialogDescription>
-            Make changes to your product details here.
+            Product information and details.
           </DialogDescription>
         </DialogHeader>
         {product && (

@@ -33,14 +33,32 @@ export const formSchemaProduct = z.object({
   tags: z.array(z.string()).optional(),
 });
 
-export async function fetchProducts(): Promise<any[]> {
-  const response = await fetch("/api/products");
+export async function fetchProducts(searchTerm: string): Promise<any[]> {
+  const response = await fetch(`/api/products?search=${searchTerm}`);
   const data = await response.json();
   return data;
 }
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const search = searchParams.get("search") || "";
+
   const snapshot = await getDocs(collection(db, "Products"));
+
+  if (search) {
+    // Filter products based on the search term (case-insensitive)
+    const filteredProducts = snapshot.docs
+      .map((doc) => ({ id: doc.id, name: doc.data().name, ...doc.data() }))
+      .filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    console.log("Filtered products:", filteredProducts);
+    return new Response(JSON.stringify(filteredProducts), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const products = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),

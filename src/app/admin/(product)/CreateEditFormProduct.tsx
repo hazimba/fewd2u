@@ -153,7 +153,7 @@ const CreateFormProduct = ({
       ) : null}
       <FormField
         control={form.control}
-        name="mainImageUrl2"
+        name="mainImageUrl"
         render={() => (
           <FormItem className="mb-4">
             <FormLabel>Main Image</FormLabel>

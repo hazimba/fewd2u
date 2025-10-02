@@ -46,7 +46,7 @@ export function CreateProduct({
       category: product?.category || "",
       origin: product?.origin || "",
       price: product?.price || "",
-      mainImageUrl: product?.mainImageUrl || "",
+      mainImageUrl: product?.mainImageUrl || null,
       available: product?.available || true,
       tags: product?.tags || [],
     },
