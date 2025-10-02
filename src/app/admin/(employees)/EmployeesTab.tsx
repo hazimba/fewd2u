@@ -6,6 +6,7 @@ import { CreateEmployee } from "./CreateEditEmployee";
 import EmployeesTable from "./EmployeesTable";
 import { Employee } from "@/types";
 import { NameFilterSearch } from "@/app/shared/NameFilterSearch";
+import PageHeader from "@/app/shared/PageHeader";
 
 const EmployeesTab = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -38,21 +39,20 @@ const EmployeesTab = () => {
   }, []);
 
   if (error) return <p>Error: {error}</p>;
-  if (!employees) return null;
 
   return (
     <div className="p-4 overflow-y auto lg:h-[80vh]">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex flex-col mb-4">
-          <h2 className="text-lg font-semibold">Employees</h2>
-          <span className="text-xs lg:text-sm">List of Employee</span>
+      <PageHeader
+        title="Employee"
+        setInputValue={setInputValue}
+        refetch={refetch}
+      />
+      {!employees ? (
+        <div className="text-center h-[40vh] flex justify-center items-center mt-20">
+          <p className="text-lg">No employees found.</p>
+          {/* <CreateEmployee refetch={refetch} /> */}
         </div>
-        {/* thats why we pass here so that in the component can be called (reference: 101) */}
-        <div className="flex space-x-2">
-          <NameFilterSearch setInputValue={setInputValue} entity="Employee" />
-          <CreateEmployee refetch={refetch} />
-        </div>
-      </div>
+      ) : null}
       {loading ? (
         <SpinnerLoading />
       ) : (

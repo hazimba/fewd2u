@@ -10,8 +10,10 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import { deleteFile } from "./deleteFile";
 
 export const formSchemaProduct = z.object({
+  id: z.any().optional(),
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -171,30 +173,7 @@ export async function DELETE(request: Request) {
 
   try {
     if (img) {
-      const url = new URL(img);
-      const bucketName = "fewd2u";
-      const prefix = `/storage/v1/object/public/${bucketName}/`;
-
-      // Extract the file path inside the bucket
-      let filePath = url.pathname.startsWith(prefix)
-        ? url.pathname.slice(prefix.length)
-        : url.pathname.replace(/^\/+/, "");
-
-      const { data, error } = await supabase.storage
-        // bucket
-        .from(bucketName)
-        // folder/fileName.ext
-        .remove([filePath]);
-
-      if (error) {
-        console.error("Supabase Storage deletion error:", {
-          message: error.message,
-          filePath,
-          fullError: error,
-        });
-      } else {
-        console.log("✓ Image deleted successfully:", data);
-      }
+      await deleteFile(img);
     }
 
     const docRef = doc(db, "Products", id);

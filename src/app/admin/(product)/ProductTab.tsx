@@ -6,6 +6,7 @@ import { use, useEffect, useState } from "react";
 import { CreateProduct } from "./CreateEditProduct";
 import { ProductCard } from "./ProductCard";
 import { NameFilterSearch } from "@/app/shared/NameFilterSearch";
+import PageHeader from "@/app/shared/PageHeader";
 
 const ProductTab = () => {
   // const { data, loading, error } = useLazyFetch(`/api/products`, true);
@@ -40,17 +41,12 @@ const ProductTab = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="p-4 overflow-y auto h-screen lg:h-[85vh] px-4">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex flex-col mb-4">
-          <h2 className="text-lg font-semibold">Product</h2>
-          <span className="text-xs lg:text-sm">List of Products</span>
-        </div>
-        <div className="flex space-x-2" onClick={(e) => e.stopPropagation()}>
-          <NameFilterSearch setInputValue={setInputValue} entity="Product" />
-          <CreateProduct refetch={refetch} />
-        </div>
-      </div>
+    <div className="p-4 overflow-y auto h-screen w-full lg:h-[85vh] px-4">
+      <PageHeader
+        title="Product"
+        setInputValue={setInputValue}
+        refetch={refetch}
+      />
       <div>
         {loading ? (
           <SpinnerLoading />

@@ -1,6 +1,8 @@
 "use client";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
+import { ArrowDown, Upload } from "lucide-react";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 
 interface FileDropzoneProps {
@@ -11,6 +13,7 @@ interface FileDropzoneProps {
 export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const getMainImg = form.watch("mainImageUrl");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -30,7 +33,7 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
   };
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-4 h-[25vh]">
       <div
         className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer w-1/3"
         onClick={() => fileInputRef.current?.click()}
@@ -64,18 +67,54 @@ export function ImageUploadForm({ form, onFileSelect }: FileDropzoneProps) {
           }}
         />
       </div>
-      <div className="w-2/3">
-        {preview && (
-          <div className="flex items-center w-full gap-8 border p-4 rounded-md">
+      <div className="w-2/3 flex flex-col gap-2 justify-between">
+        {getMainImg && (
+          <div className="flex items-center w-full gap-8 border p-2 rounded-md">
             <div className="flex items-center justify-start gap-4">
-              <img
-                src={preview}
+              <Image
+                height={200}
+                width={200}
+                src={getMainImg}
                 alt="Preview"
-                className="max-h-30 max-w-15 rounded-lg object-contain"
+                className="max-h-20 max-w-25 object-contain"
               />
             </div>
             <div className="flex flex-col gap-2 items-start">
-              <div>{selectedFile ? selectedFile.name : "No file selected"}</div>
+              <div className="text-sm">
+                {getMainImg ? "Current Main Image" : "No file selected"}
+              </div>
+              <Button
+                type="button"
+                className="text-sm border-none"
+                onClick={() => setPreview(null)}
+                variant="destructive"
+              >
+                Remove
+              </Button>
+            </div>
+          </div>
+        )}
+        {getMainImg && preview && (
+          <div className="w-full flex justify-center gap-4">
+            {/* <Badge variant="outline">to changed to</Badge> */}
+            <ArrowDown />
+          </div>
+        )}
+        {preview && (
+          <div className="flex items-center w-full gap-8 border p-2 rounded-md">
+            <div className="flex items-center justify-start gap-4">
+              <Image
+                height={200}
+                width={200}
+                src={preview}
+                alt="Preview"
+                className="min-h-20 max-w-25 object-contain"
+              />
+            </div>
+            <div className="flex flex-col gap-2 items-start">
+              <div className="text-sm">
+                {selectedFile ? selectedFile.name : "No file selected"}
+              </div>
               <Button
                 type="button"
                 className="text-sm border-none"

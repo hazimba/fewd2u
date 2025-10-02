@@ -8,9 +8,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ImageUploadForm } from "./ImageUploadForm";
+import { formSchemaProduct } from "@/app/api/products/route";
+import { UseFormReturn } from "react-hook-form";
+import z from "zod";
 
 interface CreateFormProps {
-  form: any;
+  form: UseFormReturn<z.infer<typeof formSchemaProduct>>;
   editMode?: boolean;
   onFileSelect: (file: File | null) => void;
 }
@@ -26,7 +29,13 @@ const CreateFormProduct = ({
         <FormField
           name="id"
           control={form.control}
-          render={({ field }) => <input type="hidden" {...field} />}
+          render={({ field }) => (
+            <Input
+              type="hidden"
+              {...field}
+              value={field.value as string | number | undefined}
+            />
+          )}
         />
       ) : null}
       <FormField

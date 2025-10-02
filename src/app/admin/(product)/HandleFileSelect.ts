@@ -1,7 +1,13 @@
+import { formSchemaProduct } from "@/app/api/products/route";
 import { supabase } from "@/lib/supabaseClient";
 import imageCompression from "browser-image-compression";
+import { UseFormReturn } from "react-hook-form";
+import z from "zod";
 
-export const handleFileSelect = async (files: FileList | null) => {
+export const handleFileSelect = async (
+  files: FileList | null,
+  form: UseFormReturn<z.infer<typeof formSchemaProduct>>
+) => {
   if (!files) return;
   let file = files[0];
 
