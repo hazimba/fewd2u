@@ -59,7 +59,8 @@ export default async function Home() {
                     alt="Hero Image"
                     width={110}
                     height={100}
-                    className="rounded-lg shadow-lg object-cover"
+                    sizes="small"
+                    className="rounded-lg shadow-lg object-cover !w-30"
                   />
                 ))
               : null}
@@ -75,7 +76,8 @@ export default async function Home() {
           src="/products/wallpaper-product-2.jpg"
           alt="Background"
           fill
-          className="object-cover"
+          sizes="small"
+          className="object-cover object-center h-auto"
           priority
         />
         <div className="relative z-10 flex flex-col w-full items-end h-full p-4">
