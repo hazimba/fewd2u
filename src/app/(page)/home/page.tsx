@@ -1,6 +1,7 @@
+import { ProductCard } from "@/app/admin/(product)/ProductCard";
 import { baseUrl } from "@/lib/getBaseUrl";
 import { Employee } from "@/types";
-import Image from "next/image";
+import FeatureSection from "./Feature";
 
 export const dynamic = "force-dynamic";
 
@@ -15,50 +16,29 @@ export default async function HomePage() {
 
   console.log("Users (Server Component):", users);
 
+  const product = await fetch(`${baseUrl}/api/products`, { cache: "no-store" })
+    .then((res) => res.json())
+    .catch(() => null);
+
+  console.log("Product (Server Component):", product);
+
   return (
     <div>
-      <div className="bg-custom-default min-h-screen w-1/2 lg:p-8 p-4 w-screen flex flex-col max-w-7xl ">
-        <div className="lg:flex w-full">
-          <Image
-            src="/products/wallpaper-product-2.jpg"
-            alt="Background"
-            fill
-            className="object-cover opacity-10 relative !h-124 z-0"
-          />
-          <div className="relative z-10 !w-1/2 text-gray-800 dark:text-gray-200">
-            <Image
-              src="/products/wallpaper-product.jpg"
-              alt="Hero Image"
-              width={500}
-              height={800}
-              className="lg:h-108 hidden lg:block rounded-lg shadow-lg z-10 object-cover object-bottom"
-            />
-          </div>
-          <div className="flex lg:w-1/2 lg:pt-12 flex-col justify-center h-1/2 lg:ml-8 relative z-10 text-gray-800 dark:text-gray-200">
-            {/* Additional content can go here */}
-            <p>Feature this week</p>
-            <div className="font-bold lg:text-4xl text-xl tracking-wide lg:leading-12">
-              Easy Weeknight Recipe to Make Dinner a Breeze
-            </div>
-            <div className="lg:mt-6 text-gray-600 dark:text-gray-300 lg:text-lg text-xs mt-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id minus
-              earum eum sequi, dolores expedita necessitatibus assumenda omnis,
-              dicta culpa ipsum maiores atque explicabo soluta sed sint
-              exercitationem laborum quidem.
-            </div>
-            <div className="relative lg:hidden pt-6 z-10 text-gray-800 dark:text-gray-200">
-              <Image
-                src="/products/wallpaper-product.jpg"
-                alt="Hero Image"
-                width={500}
-                height={800}
-                className="h-64 lg:hidden rounded-lg shadow-lg z-10 object-cover object-bottom"
-              />
-            </div>
-          </div>
+      {/* first section */}
+      <FeatureSection />
+      <div className="h-screen w-full flex flex-col items-center">
+        <div className="flex flex-col items-center space-y-2 mb-8 px-6 text-center">
+          <h2 className="text-2xl font-bold">FROM OUR KITCHEN</h2>
+          <p className="text-gray-600 text-sm">
+            From classic recipes to modern favorites, taste the love and effort
+            in every bite prepared in our kitchen.
+          </p>
+        </div>
+        <div className="w-full flex justify-center items-center p-4">
+          {product && <ProductCard products={product} homepage />}
         </div>
       </div>
-      <div className="bg-custom-default h-screen">123</div>
+      <FeatureSection />
     </div>
   );
 }

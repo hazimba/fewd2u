@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 export const Navigation = () => {
   return (
     <nav className="w-full flex justify-end">
-      <ul className="flex space-x-4 items-center hidden md:flex bg-[#F5F5F5] dark:bg-[#020712] px-4 py-2 rounded-lg shadow-lg">
+      <ul className="flex space-x-4 items-center hidden md:flex bg-[#F5F5F5] dark:bg-[#020712] px-4 py-2 rounded-full shadow-lg">
         {NAVIGATION_LINKS.map((link) => (
           <li key={link.name}>
             <Link

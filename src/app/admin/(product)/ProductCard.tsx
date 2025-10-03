@@ -16,17 +16,24 @@ import { ImageOff } from "lucide-react";
 
 interface ProductCardProps {
   products: Product[];
-  refetch: () => void;
+  refetch?: () => void;
+  homepage?: boolean;
 }
 
-export function ProductCard({ products, refetch }: ProductCardProps) {
+export function ProductCard({ products, refetch, homepage }: ProductCardProps) {
   const isMobile = useMobileDetectClient();
   const [openPopoverId, setOpenPopoverId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      className={`${
+        homepage
+          ? "grid lg:grid-cols-2 gap-4 w-full h-[80vh] lg:h-auto overflow-y-scroll grid-cols-1 xl:grid-cols-3"
+          : "flex flex-col gap-4 w-full"
+      }`}
+    >
       {products.map((product) => (
         <div
           key={product.name}
@@ -78,14 +85,16 @@ export function ProductCard({ products, refetch }: ProductCardProps) {
                   </CardDescription>
                 </div>
               </div>
-              <CardAction onClick={(e) => e.stopPropagation()}>
-                <ActionProduct
-                  product={product}
-                  refetch={refetch}
-                  openPopoverId={openPopoverId}
-                  setOpenPopoverId={setOpenPopoverId}
-                />
-              </CardAction>
+              {homepage && !refetch ? null : (
+                <CardAction onClick={(e) => e.stopPropagation()}>
+                  <ActionProduct
+                    product={product}
+                    refetch={refetch ?? (() => {})}
+                    openPopoverId={openPopoverId}
+                    setOpenPopoverId={setOpenPopoverId}
+                  />
+                </CardAction>
+              )}
             </CardHeader>
           </Card>
         </div>
