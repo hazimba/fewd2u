@@ -30,7 +30,7 @@ export function ProductCard({ products, refetch, homepage }: ProductCardProps) {
     <div
       className={`${
         homepage
-          ? "grid lg:grid-cols-2 gap-4 w-full h-[80vh] lg:h-auto overflow-y-auto grid-cols-1 xl:grid-cols-3"
+          ? "grid lg:grid-cols-2 gap-4 w-full h-[80vh] lg:h-auto overflow-y-scroll grid-cols-1 xl:grid-cols-3"
           : "flex flex-col gap-4 w-full"
       }`}
     >
