@@ -89,7 +89,7 @@ export function ProductCard({ products, refetch, homepage }: ProductCardProps) {
                 <CardAction onClick={(e) => e.stopPropagation()}>
                   <ActionProduct
                     product={product}
-                    refetch={refetch}
+                    refetch={refetch ?? (() => {})}
                     openPopoverId={openPopoverId}
                     setOpenPopoverId={setOpenPopoverId}
                   />
