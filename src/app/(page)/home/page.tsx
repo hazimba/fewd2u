@@ -1,11 +1,12 @@
 import Image from "next/image";
 import FeatureSection from "./Feature";
 // import OurProduct from "./OurProduct";
+import { baseUrl } from "@/lib/getBaseUrl";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const products = await fetch("http://localhost:3000/api/products", {
+  const products = await fetch(`${baseUrl}/api/products`, {
     cache: "no-store",
   })
     .then((res) => res.json())
@@ -46,8 +47,6 @@ export default async function HomePage() {
             : null}
         </div>
       </div>
-      {/* <OurProduct /> */}
-      {/* <FeatureSection /> */}
     </div>
   );
 }
