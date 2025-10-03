@@ -1,3 +1,4 @@
+"use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 
@@ -5,45 +6,47 @@ const ServiceSection = () => {
   return (
     <>
       <div className="h-screen w-screen justify-center">
-        <div className="flex justify-center font-bold w-full h-[50vh]">
+        <div className="flex justify-center font-bold w-full">
           <Tabs
             defaultValue="restaurant"
-            className="w-full flex flex-row max-w-5xl w-screen h-screen justify-center items-center"
+            className="w-full flex lg:flex-row max-w-5xl w-screen h-screen justify-center items-center"
           >
-            <TabsList className="w-2/6 flex flex-col h-96 rounded-l-lg">
-              <div className="align-left w-full px-10 pb-2 font-thin text-black text-xs">
+            <TabsList className="lg:w-2/6 flex flex-col px-4 lg:px-10 h-96 rounded-l-lg bg-custom-default">
+              <div className="align-left w-full pb-2 font-thin text-black text-xs dark:text-gray-200">
                 our services
               </div>
-              <div className="align-left w-full px-10 pb-2 font-thin text-black text-2xl">
+              <div className="align-left w-full pb-2 font-thin text-black text-2xl dark:text-gray-200">
                 Expert Care for Your Digital Needs
               </div>
-              <div className="align-left w-full px-10 font-thin text-black text-sm">
+              <div className="align-left w-full font-light text-black text-sm dark:text-gray-200">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
                 corporis nisi rerum blanditiis iste voluptatum amet iusto,
                 explicabo iure rem veniam recusandae excepturi? Repellat, odit.
               </div>
-              <TabsTrigger
-                value="restaurant"
-                className="flex w-full mt-6 justify-start items-center px-10"
-              >
-                Restaurant
-              </TabsTrigger>
-              <TabsTrigger
-                value="catering"
-                className="flex w-full justify-start items-center px-10"
-              >
-                Catering
-              </TabsTrigger>
-              <TabsTrigger
-                value="event"
-                className="flex w-full justify-start items-center px-10"
-              >
-                Event
-              </TabsTrigger>
+              <div className="grid grid-cols-3 lg:grid-cols-1 gap-2 lg:mt-6 my-4 w-full">
+                <TabsTrigger
+                  value="restaurant"
+                  className="flex w-full lg:justify-start text-start items-center p-0 cursor-pointer hover:underline p-2 border-none"
+                >
+                  Restaurant
+                </TabsTrigger>
+                <TabsTrigger
+                  value="catering"
+                  className="flex w-full lg:justify-start text-start items-center p-0 cursor-pointer hover:underline p-2 border-none"
+                >
+                  Catering
+                </TabsTrigger>
+                <TabsTrigger
+                  value="event"
+                  className="flex w-full lg:justify-start text-start items-center p-0 cursor-pointer hover:underline p-2 border-none"
+                >
+                  Event
+                </TabsTrigger>
+              </div>
             </TabsList>
             <TabsContent
               value="restaurant"
-              className="!w-3/5 px-4 flex flex-col gap-4"
+              className="lg:!w-3/5 px-4 flex flex-col gap-4"
             >
               <div>
                 <Image
@@ -68,7 +71,7 @@ const ServiceSection = () => {
             </TabsContent>
             <TabsContent
               value="catering"
-              className="!w-3/5 px-4 flex flex-col gap-4"
+              className="lg:!w-3/5 px-4 flex flex-col gap-4"
             >
               <div>
                 <Image

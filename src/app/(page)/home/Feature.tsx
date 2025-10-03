@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 // image - text (title, subtitle, desc)
 const FeatureSection = () => {
   return (
-    <div className="bg-custom-default min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
+    <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
       <div className="lg:flex max-w-7xl mx-auto">
         <Image
           src="/products/wallpaper-product-2.jpg"
@@ -34,8 +34,10 @@ const FeatureSection = () => {
             dicta culpa ipsum maiores atque explicabo soluta sed sint
             exercitationem laborum quidem.
           </div>
-          <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 space-y-6 gap-20">
-            <Button className=" w-25 lg:w-40 top-3 z-20">Shop Now</Button>
+          <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 gap-20">
+            <Button className="w-25 lg:w-40 top-3 flex flex-end z-20">
+              Shop Now
+            </Button>
             <div className="flex lg:hidden gap-4 z-30 lg:justify-start justify-center items-start">
               <Image
                 src="/icon/halal-logo.jpg"
