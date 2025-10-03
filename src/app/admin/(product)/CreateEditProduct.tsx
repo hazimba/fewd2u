@@ -49,6 +49,7 @@ export function CreateProduct({
       mainImageUrl: product?.mainImageUrl || null,
       available: product?.available || true,
       tags: product?.tags || [],
+      isFeature: product?.isFeature || false,
     },
   });
 

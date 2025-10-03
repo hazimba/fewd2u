@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 // image - text (title, subtitle, desc)
 const FeatureSection = () => {
   return (
-    <div className="bg-custom-default min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col max-w-7xl ">
-      <div className="lg:flex w-full">
+    <div className="bg-custom-default min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
+      <div className="lg:flex max-w-7xl mx-auto">
         <Image
           src="/products/wallpaper-product-2.jpg"
           alt="Background"
           fill
-          className="object-cover opacity-10 relative lg:!h-162 !h-126 z-0"
+          className="object-cover opacity-10 lg:!h-162 !h-126 z-0"
         />
-        <div className="relative z-10 !w-1/2 text-gray-800 dark:text-gray-200">
+        <div className=" z-10 !w-1/2 text-gray-800 dark:text-gray-200">
           <Image
             src="/products/wallpaper-product.jpg"
             alt="Hero Image"
             width={500}
             height={800}
-            className="lg:h-154 hidden relative lg:block shadow-lg !z-30 object-cover object-bottom"
+            className="lg:h-154 hidden lg:block shadow-lg !z-30 object-cover object-bottom"
           />
         </div>
         <div className="flex lg:w-1/2 lg:pt-12 pt-8 flex-col justify-center h-1/2 lg:ml-8 z-10 text-gray-800 dark:text-gray-200">
@@ -35,10 +35,8 @@ const FeatureSection = () => {
             exercitationem laborum quidem.
           </div>
           <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 space-y-6 gap-20">
-            <Button className=" w-25 lg:w-40 relative top-3 z-20">
-              Shop Now
-            </Button>
-            <div className="flex lg:hidden gap-4 z-30 relative lg:justify-start justify-center items-start">
+            <Button className=" w-25 lg:w-40 top-3 z-20">Shop Now</Button>
+            <div className="flex lg:hidden gap-4 z-30 lg:justify-start justify-center items-start">
               <Image
                 src="/icon/halal-logo.jpg"
                 alt="Hero Image"
@@ -75,7 +73,7 @@ const FeatureSection = () => {
       </div>
       <div className="absolute lg:top-145 top-138 left-0 w-full z-10">
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-          <div className="relative top-20"></div>
+          <div className="top-20"></div>
           {/* icon need to make small do in another file use client useMobileDetect */}
           <div className="flex hidden lg:block lg:flex lg:justify-start justify-center gap-14">
             <Image

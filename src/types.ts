@@ -25,6 +25,7 @@ export interface Product {
   mainImageUrl: string;
   available: boolean;
   tags: string[];
+  isFeature: boolean;
   // createdAt: Timestamp;
   // updatedAt: Timestamp;
 }

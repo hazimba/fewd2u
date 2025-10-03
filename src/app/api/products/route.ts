@@ -33,6 +33,7 @@ export const formSchemaProduct = z.object({
   mainImageUrl: z.any().optional(),
   available: z.boolean().optional(),
   tags: z.array(z.string()).optional(),
+  isFeature: z.boolean().optional(),
 });
 
 export async function fetchProducts(searchTerm: string): Promise<any[]> {
