@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between">
+    <div className="flex min-h-screen flex-col ">
       {/* <div> */}
       <Header />
       <main>{children}</main>

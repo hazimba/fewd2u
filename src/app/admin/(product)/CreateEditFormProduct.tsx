@@ -11,6 +11,7 @@ import { ImageUploadForm } from "./ImageUploadForm";
 import { formSchemaProduct } from "@/app/api/products/route";
 import { UseFormReturn } from "react-hook-form";
 import z from "zod";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface CreateFormProps {
   form: UseFormReturn<z.infer<typeof formSchemaProduct>>;
@@ -72,6 +73,22 @@ const CreateFormProduct = ({
             <FormLabel>Category</FormLabel>
             <FormControl>
               <Input placeholder="Category" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        control={form.control}
+        name="isFeature"
+        render={({ field }) => (
+          <FormItem className="mb-4">
+            <FormLabel>Featured</FormLabel>
+            <FormControl>
+              <Checkbox
+                onClick={() => field.onChange(!field.value)}
+                checked={field.value}
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
