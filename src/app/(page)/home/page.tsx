@@ -19,7 +19,7 @@ export default async function HomePage() {
       <FeatureSection />
       <div className="w-full text-center min-h-screen py-10">
         <h2 className="text-2xl font-bold">FROM OUR KITCHEN</h2>
-        <p className="text-gray-600 text-sm ">
+        <p className="text-gray-600 text-sm px-4 mt-2 max-w-lg mx-auto">
           From classic recipes to modern favorites, taste the love and effort in
           every bite prepared in our kitchen.
         </p>
@@ -37,11 +37,8 @@ export default async function HomePage() {
 
                   {/* Overlay text */}
                   <div className="absolute flex flex-col inset-0 flex items-center justify-center bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300">
-                    <span className="text-black text-2xl font-semibold px-2 text-center">
+                    <span className="text-black shadow-2xl p-1 font-bold text-2xl font-semibold px-2 text-center">
                       {product.name}
-                    </span>
-                    <span className="text-black hidden lg:block text-lg px-2 text-center">
-                      {product.description}
                     </span>
                   </div>
                 </div>
