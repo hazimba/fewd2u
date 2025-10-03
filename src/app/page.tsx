@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col lg:flex-row min-h-screen items-center justify-between w-screen max-w-7xl mx-auto">
-      <header className="lg:w-2/3 p-4 lg:pl-16 flex flex-col bg-custom-default h-screen max-w-7xl">
+      <header className="lg:w-2/3 p-4  flex flex-col bg-custom-default h-screen max-w-7xl">
         <div className="lg:h-16 relative w-full flex items-center mb-8 justify-between">
           <Link href="/">
             <Image
@@ -28,7 +28,7 @@ export default async function Home() {
           </Link>
           <div className="absolute left-12 top-1 lg:top-3 border-b border-[#5D7783] px-4 py-2 w-8" />
         </div>
-        <div className="h-full flex flex-col items-start justify-center text-left gap-4">
+        <div className="h-full lg:pl-16 flex flex-col items-start justify-center text-left gap-4">
           <h1 className="lg:ml-2 font-bold lg:text-6xl text-4xl tracking-wider lg:leading-18">
             The best way to find and <br /> enjoy food.
           </h1>
