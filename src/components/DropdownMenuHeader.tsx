@@ -28,7 +28,7 @@ export function DropdownMenuHeader() {
         <DropdownMenuGroup>
           <Link href="/">
             <DropdownMenuItem>
-              Home
+              Welcome
               <DropdownMenuShortcut>
                 <Home />
               </DropdownMenuShortcut>

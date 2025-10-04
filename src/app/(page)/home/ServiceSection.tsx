@@ -5,7 +5,7 @@ import Image from "next/image";
 const ServiceSection = () => {
   return (
     <>
-      <div className="h-screen w-screen justify-center">
+      <div className="h-screen w-screen justify-center mt-10 lg:mt-0">
         <div className="flex justify-center font-bold w-full">
           <Tabs
             defaultValue="restaurant"

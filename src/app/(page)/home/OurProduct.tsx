@@ -18,7 +18,13 @@ const OurProduct = async () => {
           From classic recipes to modern favorites, taste the love and effort in
           every bite prepared in our kitchen.
         </p>
-        <ProductImageRender products={products} />
+
+        <div className="mt-6 font-thin w-full text-[10px]">
+          <span className="lg:hidden w-full flex justify-end pr-1">
+            *click image for magic
+          </span>
+          <ProductImageRender products={products} />
+        </div>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 export const NAVIGATION_LINKS = [
-  { name: "Home", href: "/" },
+  { name: "Welcome", href: "/" },
+  // { name: "Home", href: "/home" },
   { name: "About", href: "/about" },
   //   { name: "Contact", href: "/contact" },
 ];

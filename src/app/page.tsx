@@ -1,12 +1,8 @@
-import { DropdownMenuHeader } from "@/components/DropdownMenuHeader";
 import { LoadingButton } from "@/components/LoadingButton";
 import ModeToggle from "@/components/mode-toggle";
 import { Navigation } from "@/components/Navigation";
-import { Button } from "@/components/ui/button";
-import { NAVIGATION_LINKS } from "@/lib/const";
 import { baseUrl } from "@/lib/getBaseUrl";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function Home() {
   const url = `${baseUrl}/api/products`;
@@ -16,27 +12,19 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col lg:flex-row min-h-screen items-center justify-between w-screen max-w-7xl mx-auto">
-      <header className="lg:w-2/3 p-4  flex flex-col bg-custom-default h-screen max-w-7xl">
-        <div className="lg:h-16 relative w-full flex items-center mb-8 justify-between">
-          <Link href="/">
-            <Image
-              src="/favicon.ico"
-              alt="Fewd2u Logo"
-              width={40}
-              height={40}
-            />
-          </Link>
-          <div className="absolute left-12 top-1 lg:top-3 border-b border-[#5D7783] px-4 py-2 w-8" />
-        </div>
-        <div className="h-full lg:pl-16 flex flex-col items-start justify-center text-left gap-4">
-          <h1 className="lg:ml-2 font-bold lg:text-6xl text-4xl tracking-wider lg:leading-18">
+      <header className="lg:w-2/3 p-1  flex flex-col bg-custom-default lg:h-screen max-w-7xl">
+        <div className="lg:h-full h-[90vh] lg:pl-16 flex flex-col items-start pt-2 px-2 lg:pt-0 lg:justify-center text-left gap-4">
+          <h1 className="lg:ml-2 mt-20 font-bold lg:text-6xl text-4xl tracking-wider lg:leading-16">
+            <div className="text-sm font-light hover:font-bold cursor-pointer">
+              fewd2u
+            </div>
             The best way to find and <br /> enjoy food.
           </h1>
           <div className="lg:text-2xl lg:mt-2 text-gray-700 lg:leading-7">
             Enjoy your favorite meals from the best restaurants in town,
             delivered to your doorstep.
           </div>
-          <div className="lg:mt-12 lg:mb-6 flex gap-4">
+          <div className="lg:mt-4 lg:mb-6 flex gap-4">
             <LoadingButton
               type="button"
               variant="default"
@@ -66,7 +54,7 @@ export default async function Home() {
                 ))
               : null}
           </div>
-          <div className="mt-4 text-gray-600">
+          <div className="mt-0 text-gray-600">
             Over 10,000+ dishes to choose from.
           </div>
         </div>
@@ -81,11 +69,11 @@ export default async function Home() {
           className="object-cover object-center h-auto"
           priority
         />
-        <div className="relative z-10 flex flex-col w-full items-end h-full p-4">
+        <div className="relative z-10 flex flex-col w-full items-end h-full p-2">
           <Navigation />
-          <div className="text-4xl w-full font-bold h-full flex justify-center items-center mb-40 drop-shadow-lg !text-white text-center shadow-lg">
+          <div className="text-4xl leading-12 w-full font-bold h-full flex justify-center items-center mb-40 drop-shadow-lg !text-white text-center shadow-lg">
             Delicious food, <br />
-            cherish every moment.
+            brings people together.
           </div>
         </div>
       </div>

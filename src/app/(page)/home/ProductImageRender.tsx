@@ -19,7 +19,7 @@ const ProductImageRender = ({ products }: ProductImageRenderProps) => {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 grid-cols-1 pt-12">
+      <div className="grid lg:grid-cols-3 grid-cols-1">
         {products
           ? products.map((product: any) => {
               const isActive = activeProduct === product.id;
