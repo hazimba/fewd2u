@@ -9,7 +9,7 @@ const OurProduct = async () => {
     .then((res) => res.json())
     .catch(() => null);
 
-  console.log("products (Server Component):", products);
+  // console.log("products (Server Component):", products);
   return (
     <>
       <div className="w-full text-center min-h-screen py-10">

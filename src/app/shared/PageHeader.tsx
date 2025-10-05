@@ -16,7 +16,7 @@ const PageHeader = ({ title, setInputValue, refetch }: PageHeaderProps) => {
         <span className="text-xs lg:text-sm">List of {title}</span>
       </div>
       <div
-        className="flex w-full space-x-2 justify-end"
+        className="flex w-full gap-2 lg:justify-end justify-between"
         onClick={(e) => e.stopPropagation()}
       >
         <NameFilterSearch setInputValue={setInputValue} entity={title} />

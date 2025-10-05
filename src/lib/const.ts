@@ -10,6 +10,10 @@ export enum TAB {
   PRODUCT = "product",
   PERMISSION = "permission",
   OTHER = "other",
+  FEATURE = "feature",
+  SERVICE = "service",
+  CONTACT = "contact",
+  ABOUT = "about",
 }
 
 export const ADMIN_NAVIGATION_LINKS = [
@@ -17,6 +21,13 @@ export const ADMIN_NAVIGATION_LINKS = [
   { name: "Products", value: "product" },
   { name: "Permission", value: "permission" },
   { name: "Others", value: "other" },
+];
+
+export const PAGES_LINKS = [
+  { name: "Feature", value: "feature" },
+  { name: "Service", value: "service" },
+  { name: "Contact Us", value: "contact" },
+  { name: "About", value: "about" },
 ];
 
 export const COURSE = [

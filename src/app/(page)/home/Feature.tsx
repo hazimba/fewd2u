@@ -1,21 +1,46 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { baseUrl } from "@/lib/getBaseUrl";
+import { getOneFeaturePage } from "@/app/api/featurePages/route";
 
 // here will fetch data from api and display
 // image - text (title, subtitle, desc)
-const FeatureSection = () => {
+
+interface FeaturePage {
+  id: string;
+  bgImageUrl?: string;
+  displayImageUrl?: string;
+  isActive: boolean;
+  mainTitle: string;
+  subtitle: string;
+  title: string;
+}
+
+const FeatureSection = async () => {
+  const res = await getOneFeaturePage(true);
+  const featureData: FeaturePage = await res.json();
+  console.log("featureData", featureData);
+
   return (
     <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
       <div className="lg:flex max-w-7xl mx-auto">
         <Image
-          src="/products/wallpaper-product-2.jpg"
+          src={
+            featureData.bgImageUrl
+              ? featureData.bgImageUrl
+              : "/products/wallpaper-product-2.jpg"
+          }
           alt="Background"
           fill
           className="object-cover opacity-10 lg:!h-162 !h-126 z-0"
         />
         <div className=" z-10 !w-1/2 text-gray-800 dark:text-gray-200">
           <Image
-            src="/products/wallpaper-product.jpg"
+            src={
+              featureData.displayImageUrl
+                ? featureData.displayImageUrl
+                : "/products/hero-product.png"
+            }
             alt="Hero Image"
             width={500}
             height={800}
@@ -24,15 +49,12 @@ const FeatureSection = () => {
         </div>
         <div className="flex lg:w-1/2 lg:pt-12 pt-8 flex-col justify-center h-1/2 lg:ml-8 z-10 text-gray-800 dark:text-gray-200">
           {/* Additional content can go here */}
-          <p>Feature this week</p>
+          <p>{featureData.title}</p>
           <div className="font-bold lg:text-4xl text-xl tracking-wide lg:leading-12">
-            Easy Weeknight Recipe to Make Dinner a Breeze
+            {featureData.mainTitle}
           </div>
           <div className="lg:mt-6 text-gray-600 dark:text-gray-300 lg:text-lg text-xs mt-2">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id minus
-            earum eum sequi, dolores expedita necessitatibus assumenda omnis,
-            dicta culpa ipsum maiores atque explicabo soluta sed sint
-            exercitationem laborum quidem.
+            {featureData.subtitle}
           </div>
           <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 gap-20">
             <Button className="w-25 lg:w-40 top-3 flex flex-end z-20">

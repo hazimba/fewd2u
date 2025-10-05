@@ -29,3 +29,13 @@ export interface Product {
   // createdAt: Timestamp;
   // updatedAt: Timestamp;
 }
+
+export interface FeaturePage {
+  id: string;
+  bgImageUrl: string;
+  displayImageUrl: string;
+  isActive: boolean;
+  mainTitle: string;
+  subtitle: string;
+  title: string;
+}
