@@ -36,11 +36,7 @@ const FeatureSection = async () => {
         />
         <div className=" z-10 !w-1/2 text-gray-800 dark:text-gray-200">
           <Image
-            src={
-              featureData.displayImageUrl
-                ? featureData.displayImageUrl
-                : "/products/hero-product.png"
-            }
+            src="/products/hero-product.png"
             alt="Hero Image"
             width={500}
             height={800}
@@ -49,12 +45,15 @@ const FeatureSection = async () => {
         </div>
         <div className="flex lg:w-1/2 lg:pt-12 pt-8 flex-col justify-center h-1/2 lg:ml-8 z-10 text-gray-800 dark:text-gray-200">
           {/* Additional content can go here */}
-          <p>{featureData.title}</p>
+          <p>Feature this week</p>
           <div className="font-bold lg:text-4xl text-xl tracking-wide lg:leading-12">
-            {featureData.mainTitle}
+            Easy Weeknight Recipe to Make Dinner a Breeze
           </div>
           <div className="lg:mt-6 text-gray-600 dark:text-gray-300 lg:text-lg text-xs mt-2">
-            {featureData.subtitle}
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio
+            hic autem quae voluptatem! Dicta perspiciatis, dolores obcaecati
+            esse rem corrupti expedita et saepe, itaque natus reprehenderit
+            iusto odit ut magni?
           </div>
           <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 gap-20">
             <Button className="w-25 lg:w-40 top-3 flex flex-end z-20">

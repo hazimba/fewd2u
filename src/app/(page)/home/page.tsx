@@ -12,7 +12,7 @@ export default async function HomePage() {
   return (
     <div>
       {/* first section */}
-      {/* <FeatureSection /> */}
+      <FeatureSection />
       <OurProduct />
       <ServiceSection />
       <ContactUsSection />
