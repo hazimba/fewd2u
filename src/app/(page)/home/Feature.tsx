@@ -17,19 +17,15 @@ interface FeaturePage {
 }
 
 const FeatureSection = async () => {
-  const res = await getOneFeaturePage(true);
-  const featureData: FeaturePage = await res.json();
-  console.log("featureData", featureData);
+  // const res = await getOneFeaturePage(true);
+  // const featureData: FeaturePage = await res.json();
+  // console.log("featureData", featureData);
 
   return (
     <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
       <div className="lg:flex max-w-7xl mx-auto">
         <Image
-          src={
-            featureData.bgImageUrl
-              ? featureData.bgImageUrl
-              : "/products/wallpaper-product-2.jpg"
-          }
+          src="/products/wallpaper-product-2.jpg"
           alt="Background"
           fill
           className="object-cover opacity-10 lg:!h-162 !h-126 z-0"
