@@ -17,9 +17,19 @@ interface FeaturePage {
 }
 
 const FeatureSection = async () => {
-  // const res = await getOneFeaturePage(true);
-  // const featureData: FeaturePage = await res.json();
-  // console.log("featureData", featureData);
+  const res = await getOneFeaturePage(true);
+  const { data, error } = await res.json();
+
+  if (error) {
+    return <div>Failed to load</div>;
+  }
+
+  if (!data) {
+    return <div>No data</div>;
+  }
+
+  const featurePage: FeaturePage = data;
+  console.log("featurePage", featurePage);
 
   return (
     <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">

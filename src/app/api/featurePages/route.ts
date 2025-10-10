@@ -45,25 +45,31 @@ export async function fetchFeaturePages() {
 }
 
 export async function GET(request: Request) {
-  // get all feature pages
-  const snapshot = await getDocs(collection(db, "FeaturePages"));
+  try {
+    // get all feature pages
+    const snapshot = await getDocs(collection(db, "FeaturePages"));
 
-  //   filter which field to return
-  let featurePages: FeaturePage[] = snapshot.docs.map((doc) => ({
-    displayImageUrl: doc.data().displayImageUrl,
-    bgImageUrl: doc.data().bgImageUrl,
-    title: doc.data().title,
-    mainTitle: doc.data().mainTitle,
-    subtitle: doc.data().subtitle,
-    isActive: doc.data().isActive,
-    id: doc.id,
-  })) as FeaturePage[];
+    //   filter which field to return
+    let featurePages: FeaturePage[] = snapshot.docs.map((doc) => ({
+      displayImageUrl: doc.data().displayImageUrl,
+      bgImageUrl: doc.data().bgImageUrl,
+      title: doc.data().title,
+      mainTitle: doc.data().mainTitle,
+      subtitle: doc.data().subtitle,
+      isActive: doc.data().isActive,
+      id: doc.id,
+    })) as FeaturePage[];
 
-  if (featurePages.length === 0) {
-    return new Response(JSON.stringify(null), { status: 200 });
+    if (featurePages.length === 0) {
+      return new Response(JSON.stringify(null), { status: 200 });
+    }
+
+    return new Response(JSON.stringify(featurePages), { status: 200 });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch data" }), {
+      status: 500,
+    });
   }
-
-  return new Response(JSON.stringify(featurePages), { status: 200 });
 }
 
 export async function POST(request: Request) {

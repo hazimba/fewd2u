@@ -1,10 +1,7 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
+import ContactUsSection from "./ContactUsSection";
 import FeatureSection from "./Feature";
 import OurProduct from "./OurProduct";
 import ServiceSection from "./ServiceSection";
-import { Contact } from "lucide-react";
-import ContactUsSection from "./ContactUsSection";
 
 export const dynamic = "force-dynamic";
 
