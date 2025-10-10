@@ -1,5 +1,5 @@
 "use client";
-import { fetchFeaturePages } from "@/app/api/featurePages/route";
+// import { fetchFeaturePages } from "@/app/api/featurePages/route";
 import PageHeader from "@/app/shared/PageHeader";
 import { FeaturePage } from "@/types";
 import { useEffect, useState } from "react";
@@ -12,7 +12,8 @@ const FeatureTab = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const pages = await fetchFeaturePages();
+      const res = await fetch("/api/featurePages");
+      const pages = await res.json();
       setFeaturePages(
         pages.sort((a: FeaturePage, b: FeaturePage) => {
           return a.isActive === true ? -1 : 1;
