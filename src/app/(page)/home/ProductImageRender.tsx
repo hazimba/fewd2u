@@ -1,0 +1,69 @@
+"use client";
+import Image from "next/image";
+import { useState } from "react";
+import { useMobileDetectClient } from "@/lib/hooks/useMobileDetect";
+
+interface ProductImageRenderProps {
+  products: any[];
+}
+
+const ProductImageRender = ({ products }: ProductImageRenderProps) => {
+  const isMobile = useMobileDetectClient();
+  const [activeProduct, setActiveProduct] = useState<number | null>(null);
+
+  const handleProductClick = (productId: number) => {
+    if (isMobile) {
+      setActiveProduct(activeProduct === productId ? null : productId);
+    }
+  };
+
+  return (
+    <>
+      <div className="grid lg:grid-cols-3 grid-cols-1">
+        {products
+          ? products.map((product: any) => {
+              const isActive = activeProduct === product.id;
+
+              return (
+                <div
+                  key={product.id}
+                  className="relative group cursor-pointer"
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <Image
+                    src={product.mainImageUrl}
+                    alt={product.name}
+                    height={100}
+                    width={500}
+                    className={`object-cover transition duration-300 lg:!h-50 h-20 w-full ${
+                      isMobile
+                        ? isActive
+                          ? "opacity-100"
+                          : "opacity-40"
+                        : "opacity-40 group-hover:opacity-100"
+                    }`}
+                  />
+
+                  <div
+                    className={`absolute flex flex-col inset-0 flex items-center justify-center bg-opacity-40 transition duration-300 ${
+                      isMobile
+                        ? isActive
+                          ? "opacity-100"
+                          : "opacity-0"
+                        : "opacity-0 group-hover:opacity-100"
+                    }`}
+                  >
+                    <span className="text-black shadow-2xl p-1 font-bold text-2xl font-semibold px-2 text-center">
+                      {product.name}
+                    </span>
+                  </div>
+                </div>
+              );
+            })
+          : null}
+      </div>
+    </>
+  );
+};
+
+export default ProductImageRender;

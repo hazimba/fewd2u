@@ -5,16 +5,19 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import EmployeesTab from "./(employees)/EmployeesTab";
 import { useState } from "react";
 import ProductTab from "./(product)/ProductTab";
-import { ADMIN_NAVIGATION_LINKS } from "@/lib/const";
+import { ADMIN_NAVIGATION_LINKS, PAGES_LINKS } from "@/lib/const";
 import { TAB } from "@/lib/const";
+import FeatureTab from "./(feature)/FeatureTab";
 
 export default function LeftNavigation() {
   // in future need to use lazy loading for each tab content
 
-  const [activeTab, setActiveTab] = useState<string>(TAB.PRODUCT);
+  const [activeTab, setActiveTab] = useState<string>(TAB.FEATURE);
   const onTabChange = (value: string) => {
     setActiveTab(value);
   };
+
+  console.log("activeTab", activeTab);
 
   return (
     <Tabs
@@ -27,6 +30,20 @@ export default function LeftNavigation() {
           Manage
         </div>
         {ADMIN_NAVIGATION_LINKS.map((link) => (
+          <TabsTrigger
+            key={link.value}
+            onClick={() => onTabChange(link.value)}
+            value={link.value}
+            className="lg:w-full"
+          >
+            {link.name}
+          </TabsTrigger>
+        ))}
+
+        <div className="hidden lg:block align-left w-full p-2 text-sm">
+          Pages
+        </div>
+        {PAGES_LINKS.map((link) => (
           <TabsTrigger
             key={link.value}
             onClick={() => onTabChange(link.value)}
@@ -52,6 +69,12 @@ export default function LeftNavigation() {
         </TabsContent>
         <TabsContent value={TAB.OTHER}>
           {activeTab === TAB.OTHER && <p>Other tab content goes here.</p>}
+        </TabsContent>
+        <TabsContent value="Feature" forceMount>
+          {activeTab === "feature" && <FeatureTab />}
+        </TabsContent>
+        <TabsContent value="About" forceMount>
+          {activeTab === "about" && <>About tab content goes here.</>}
         </TabsContent>
       </div>
     </Tabs>

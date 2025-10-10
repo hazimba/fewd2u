@@ -4,20 +4,20 @@ import { Navigation } from "./Navigation";
 
 const Header = () => {
   return (
-    <header className="w-screen sticky top-0 p-1 z-20">
+    <header className="w-screen sticky top-1 h-14 p-1 z-50">
       <div className="flex max-w-7xl mx-auto justify-between items-center px-2">
-        <div className="flex max-w-7xl items-center lg:space-x-2 lg:p-2 lg:pr-3 bg-custom-default rounded-full shadow-lg">
-          <Link href="/">
+        <div className="flex items-center lg:space-x-2 lg:px-1 lg:pr-3 rounded-full group transition-all duration-300">
+          <Link href="/" className="flex items-center">
             <Image
               src="/favicon.ico"
               alt="Fewd2u Logo"
               width={40}
               height={40}
             />
+            <span className="overflow-hidden w-30 max-w-0 group-hover:max-w-xs transition-all duration-300 font-bold text-lg text-gray-800 dark:text-gray-200 whitespace-nowrap ml-0 group-hover:ml-2">
+              Fewd2u
+            </span>
           </Link>
-          <span className="hidden lg:block font-bold text-lg text-gray-800 dark:text-gray-200">
-            Fewd2u
-          </span>
         </div>
         <Navigation />
       </div>

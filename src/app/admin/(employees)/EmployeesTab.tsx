@@ -41,7 +41,7 @@ const EmployeesTab = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="p-4 overflow-y auto lg:h-[80vh]">
+    <div className="p-4 overflow-y auto lg:h-[80vh] px-2">
       <PageHeader
         title="Employee"
         setInputValue={setInputValue}
