@@ -22,29 +22,7 @@ export const featurePageFormSchema = z.object({
   title: z.string(),
 });
 
-export async function getOneFeaturePage(onlyActive: boolean = false) {
-  const snapshot = await fetch(`${baseUrl}/api/featurePages`);
-
-  const data = await snapshot.json();
-  const filtered = data.filter((page: FeaturePage) => page.isActive);
-
-  if (filtered.length === 0) {
-    return new Response(JSON.stringify(null), { status: 200 });
-  }
-
-  return new Response(
-    JSON.stringify(filtered.length > 0 ? filtered[0] : null),
-    { status: 200 }
-  );
-}
-
-export async function fetchFeaturePages() {
-  const snapshot = await fetch(`${baseUrl}/api/featurePages`);
-  const data = await snapshot.json();
-  return data;
-}
-
-export async function GET(request: Request) {
+export async function GET() {
   try {
     // get all feature pages
     const snapshot = await getDocs(collection(db, "FeaturePages"));

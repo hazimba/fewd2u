@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { baseUrl } from "@/lib/getBaseUrl";
-import { getOneFeaturePage } from "@/app/api/featurePages/route";
+import Image from "next/image";
+import { getBaseUrl } from "@/lib/getBaseUrl";
 
 // here will fetch data from api and display
 // image - text (title, subtitle, desc)
@@ -17,19 +16,14 @@ interface FeaturePage {
 }
 
 const FeatureSection = async () => {
-  const res = await getOneFeaturePage(true);
-  const { data, error } = await res.json();
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/featurePages`, { cache: "no-store" });
+  const data = await res.json();
+  const featurePage = data.find((page: FeaturePage) => page.isActive);
 
-  if (error) {
-    return <div>Failed to load</div>;
-  }
-
-  if (!data) {
-    return <div>No data</div>;
-  }
-
-  const featurePage: FeaturePage = data;
   console.log("featurePage", featurePage);
+
+  if (!featurePage) return <div>No active feature</div>;
 
   return (
     <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
@@ -42,7 +36,7 @@ const FeatureSection = async () => {
         />
         <div className=" z-10 !w-1/2 text-gray-800 dark:text-gray-200">
           <Image
-            src="/products/hero-product.png"
+            src="/products/wallpaper-product.jpg"
             alt="Hero Image"
             width={500}
             height={800}
