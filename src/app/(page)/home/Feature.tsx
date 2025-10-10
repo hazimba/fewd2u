@@ -21,7 +21,7 @@ const FeatureSection = async () => {
   const data = await res.json();
   const featurePage = data.find((page: FeaturePage) => page.isActive);
 
-  console.log("123featurePage123", featurePage);
+  console.log("featurePage123", featurePage);
 
   if (!featurePage) return <div>No active feature</div>;
 
@@ -45,12 +45,12 @@ const FeatureSection = async () => {
         </div>
         <div className="flex lg:w-1/2 lg:pt-12 pt-8 flex-col justify-center h-1/2 lg:ml-8 z-10 text-gray-800 dark:text-gray-200">
           {/* Additional content can go here */}
-          <p>{featurePage.subtitle}</p>
+          <p>{featurePage.title}</p>
           <div className="font-bold lg:text-4xl text-xl tracking-wide lg:leading-12">
-            {featurePage.title}
+            {featurePage.mainTitle}
           </div>
           <div className="lg:mt-6 text-gray-600 dark:text-gray-300 lg:text-lg text-xs mt-2">
-            {featurePage.description}
+            {featurePage.subtitle}
           </div>
           <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 gap-20">
             <Button className="w-25 lg:w-40 top-3 flex flex-end z-20">
