@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { baseUrl } from "@/lib/getBaseUrl";
-import { getOneFeaturePage } from "@/app/api/featurePages/route";
+import Image from "next/image";
+import { getBaseUrl } from "@/lib/getBaseUrl";
 
 // here will fetch data from api and display
 // image - text (title, subtitle, desc)
@@ -17,32 +16,27 @@ interface FeaturePage {
 }
 
 const FeatureSection = async () => {
-  const res = await getOneFeaturePage(true);
-  const { data, error } = await res.json();
+  const baseUrl = getBaseUrl();
+  const res = await fetch(`${baseUrl}/api/featurePages`, { cache: "no-store" });
+  const data = await res.json();
+  const featurePage = data.find((page: FeaturePage) => page.isActive);
 
-  if (error) {
-    return <div>Failed to load</div>;
-  }
+  console.log("featurePage123", featurePage);
 
-  if (!data) {
-    return <div>No data</div>;
-  }
-
-  const featurePage: FeaturePage = data;
-  console.log("featurePage", featurePage);
+  if (!featurePage) return <div>No active feature</div>;
 
   return (
     <div className="bg-custom-default min-h-[75vh] lg:min-h-screen w-1/2 lg:p-8 lg:pb-0 p-4 w-screen flex flex-col">
       <div className="lg:flex max-w-7xl mx-auto">
         <Image
-          src="/products/wallpaper-product-2.jpg"
+          src={featurePage.bgImageUrl || "/products/wallpaper-product.jpg"}
           alt="Background"
           fill
           className="object-cover opacity-10 lg:!h-162 !h-126 z-0"
         />
         <div className=" z-10 !w-1/2 text-gray-800 dark:text-gray-200">
           <Image
-            src="/products/hero-product.png"
+            src={featurePage.displayImageUrl || "/products/hero-product.png"}
             alt="Hero Image"
             width={500}
             height={800}
@@ -51,15 +45,12 @@ const FeatureSection = async () => {
         </div>
         <div className="flex lg:w-1/2 lg:pt-12 pt-8 flex-col justify-center h-1/2 lg:ml-8 z-10 text-gray-800 dark:text-gray-200">
           {/* Additional content can go here */}
-          <p>Feature this week</p>
+          <p>{featurePage.title}</p>
           <div className="font-bold lg:text-4xl text-xl tracking-wide lg:leading-12">
-            Easy Weeknight Recipe to Make Dinner a Breeze
+            {featurePage.mainTitle}
           </div>
           <div className="lg:mt-6 text-gray-600 dark:text-gray-300 lg:text-lg text-xs mt-2">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio
-            hic autem quae voluptatem! Dicta perspiciatis, dolores obcaecati
-            esse rem corrupti expedita et saepe, itaque natus reprehenderit
-            iusto odit ut magni?
+            {featurePage.subtitle}
           </div>
           <div className="flex lg:mt-20 lg:items-start text-center items-center mt-6 gap-20">
             <Button className="w-25 lg:w-40 top-3 flex flex-end z-20">
